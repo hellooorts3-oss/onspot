@@ -63,11 +63,11 @@ export default function SpaceDesign() {
   return (
     <section id="space" className="py-24 bg-white overflow-hidden">
       {/* 헤더 */}
-      <div className="max-w-6xl mx-auto px-4">
+      <div className="max-w-6xl mx-auto px-6">
         <div
           ref={ref}
           className="text-center mb-14"
-          style={{ opacity: inView ? 1 : 0, transform: inView ? "none" : "translateY(30px)", transition: "all 0.7s ease" }}
+          style={{ opacity: inView ? 1 : 0, transform: inView ? "none" : "translateY(46px)", transition: "all 0.8s cubic-bezier(0.16,1,0.3,1)" }}
         >
           <h2 className="text-4xl md:text-5xl font-black text-[#111] leading-tight">
             편하게 앉고, 맛있게 즐기고<br />
@@ -79,7 +79,7 @@ export default function SpaceDesign() {
       {/* 인테리어 슬라이드 — 풀폭, 라벨 오버레이 */}
       <div
         className="relative overflow-hidden marquee-mask mb-16 py-2"
-        style={{ opacity: inView ? 1 : 0, transition: "opacity 0.7s ease 0.2s" }}
+        style={{ opacity: inView ? 1 : 0, transform: inView ? "none" : "translateY(40px)", transition: "all 0.8s cubic-bezier(0.16,1,0.3,1) 0.2s" }}
       >
         <div className="flex w-max gap-4 marquee-track">
           {[...interiorSlides, ...interiorSlides].map((s, i) => (
@@ -89,14 +89,14 @@ export default function SpaceDesign() {
       </div>
 
       {/* 스낵바 — 인테리어와 동일한 슬라이더 (반대 방향) */}
-      <div className="max-w-6xl mx-auto px-4">
-        <p className="text-center text-gray-400 text-xs font-bold uppercase tracking-widest mb-6">
+      <div className="max-w-6xl mx-auto px-6">
+        <p className="text-center text-gray-400 text-sm font-bold uppercase tracking-widest mb-6">
           온스팟 24시 스낵바
         </p>
       </div>
       <div
         className="relative overflow-hidden marquee-mask py-2"
-        style={{ opacity: inView ? 1 : 0, transition: "opacity 0.7s ease 0.4s" }}
+        style={{ opacity: inView ? 1 : 0, transform: inView ? "none" : "translateY(40px)", transition: "all 0.8s cubic-bezier(0.16,1,0.3,1) 0.4s" }}
       >
         <div className="flex w-max gap-4 marquee-track" style={{ animationDirection: "reverse" }}>
           {[...snackBarSlides, ...snackBarSlides, ...snackBarSlides, ...snackBarSlides].map((s, i) => (

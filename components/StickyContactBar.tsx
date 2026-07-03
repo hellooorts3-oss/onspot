@@ -16,7 +16,7 @@ export default function StickyContactBar() {
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 bg-[#E41220] shadow-2xl">
-      <div className="max-w-6xl mx-auto px-4">
+      <div className="max-w-6xl mx-auto px-6">
         {/* Desktop */}
         <form
           onSubmit={handleSubmit}
@@ -26,7 +26,7 @@ export default function StickyContactBar() {
           <div className="flex items-center gap-2 text-white mr-2 flex-shrink-0">
             <Phone size={16} />
             <div>
-              <div className="text-[10px] text-white/70 leading-none">빠른 상담문의</div>
+              <div className="text-sm text-white/70 leading-none">빠른 상담문의</div>
               <div className="font-black text-base leading-tight">0000-0000</div>
             </div>
           </div>
@@ -70,7 +70,7 @@ export default function StickyContactBar() {
                   onChange={(e) => setForm({ ...form, agree: e.target.checked })}
                   className="w-3.5 h-3.5 accent-white"
                 />
-                <span className="text-white/80 text-[11px] whitespace-nowrap">개인정보 동의</span>
+                <span className="text-white/80 text-sm whitespace-nowrap">개인정보 동의</span>
               </label>
 
               <button
@@ -88,7 +88,7 @@ export default function StickyContactBar() {
           <a href="tel:00000000" className="flex items-center gap-2 text-white">
             <Phone size={18} />
             <div>
-              <div className="text-[10px] text-white/70">빠른 상담문의</div>
+              <div className="text-sm text-white/70">빠른 상담문의</div>
               <div className="font-black text-sm">0000-0000</div>
             </div>
           </a>

@@ -169,10 +169,9 @@ export default function CustomerReviews() {
         {/* 헤더 */}
         <div
           ref={ref}
-          className="text-center mb-14"
-          style={{ opacity: inView ? 1 : 0, transform: inView ? "none" : "translateY(30px)", transition: "all 0.8s ease" }}
+          className={`text-center mb-14 anim-seq ${inView ? "is-in" : ""}`}
         >
-          <span className="inline-block bg-[#E41220] text-white text-xs font-black rounded-full px-4 py-1.5 mb-5 tracking-wide">
+          <span className="inline-block bg-[#E41220] text-white text-sm font-black rounded-full px-4 py-1.5 mb-5 tracking-wide">
             CUSTOMER REVIEWS
           </span>
           <h2 className="text-4xl md:text-5xl font-black leading-tight">
@@ -185,20 +184,20 @@ export default function CustomerReviews() {
       {/* ── 리뷰 캡처 — 평면 한 줄, 가운데 확대 ── */}
       <div
         className="px-4"
-        style={{ opacity: inView ? 1 : 0, transition: "all 0.8s ease 0.2s" }}
+        style={{ opacity: inView ? 1 : 0, transition: "all 0.85s cubic-bezier(0.16,1,0.3,1) 0.2s" }}
       >
         <ReviewCarousel />
       </div>
 
       <div className="max-w-6xl mx-auto px-6">
-        <p className="text-gray-300 text-[11px] text-center mt-8 mb-12">
+        <p className="text-gray-300 text-sm text-center mt-8 mb-12">
           * 네이버 플레이스에 등록된 실제 고객 리뷰입니다
         </p>
 
         {/* SNS 바이럴 수치 */}
         <div
           className="bg-[#E41220] rounded-3xl p-8 grid grid-cols-3 gap-4 text-center"
-          style={{ opacity: inView ? 1 : 0, transition: "opacity 0.8s ease 0.4s" }}
+          style={{ opacity: inView ? 1 : 0, transform: inView ? "none" : "translateY(46px)", transition: "all 0.85s cubic-bezier(0.16,1,0.3,1) 0.4s" }}
         >
           {[
             { num: "11만+", label: "인스타 릴스 조회수" },
@@ -207,7 +206,7 @@ export default function CustomerReviews() {
           ].map((s, i) => (
             <div key={i}>
               <div className="text-3xl md:text-4xl font-black text-white mb-1">{s.num}</div>
-              <div className="text-white/60 text-xs">{s.label}</div>
+              <div className="text-white/60 text-sm">{s.label}</div>
             </div>
           ))}
         </div>

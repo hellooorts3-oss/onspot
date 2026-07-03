@@ -44,15 +44,15 @@ export default function WhyDetail() {
 
   return (
     <section className="py-28 bg-white overflow-hidden">
-      <div className="max-w-5xl mx-auto px-6">
+      <div className="max-w-6xl mx-auto px-6">
 
         {/* ── 헤더 ── */}
         <div
           ref={ref}
           className="mb-16"
-          style={{ opacity: inView ? 1 : 0, transform: inView ? "none" : "translateY(30px)", transition: "all 0.8s ease" }}
+          style={{ opacity: inView ? 1 : 0, transform: inView ? "none" : "translateY(46px)", transition: "all 0.85s cubic-bezier(0.16,1,0.3,1)" }}
         >
-          <h2 className="text-5xl md:text-6xl font-black text-[#111] leading-[1.05]">
+          <h2 className="text-4xl md:text-5xl font-black text-[#111] leading-[1.05]">
             온스팟이기에<br />가능한 것들
           </h2>
         </div>
@@ -60,17 +60,17 @@ export default function WhyDetail() {
         {/* ── 1) 매장 직원 서비스 ── */}
         <div
           className="grid md:grid-cols-2 gap-10 items-center mb-24"
-          style={{ opacity: inView ? 1 : 0, transition: "all 0.8s ease 0.15s" }}
+          style={{ opacity: inView ? 1 : 0, transition: "all 0.85s cubic-bezier(0.16,1,0.3,1) 0.15s" }}
         >
           <div>
-            <p className="text-[#E41220] text-xs font-bold mb-3">DETAIL 01</p>
-            <h3 className="text-3xl md:text-4xl font-black text-[#111] mb-5 leading-snug">
+            <p className="text-[#E41220] text-sm font-bold mb-3">DETAIL 01</p>
+            <h3 className="text-2xl md:text-3xl font-black text-[#111] mb-5 leading-snug">
               매장 직원 서비스
             </h3>
-            <p className="text-gray-500 leading-[1.9] text-base mb-4">
+            <p className="text-gray-500 leading-[1.9] text-lg mb-4">
               24시 무인 매장은 청결·응대·보안 등 <strong className="text-[#111]">관리가 어렵습니다.</strong>
             </p>
-            <p className="text-gray-500 leading-[1.9] text-base">
+            <p className="text-gray-500 leading-[1.9] text-lg">
               온스팟은 고객 안내와 기본 응대 중심의 <strong className="text-[#111]">직원을 배치</strong>하여
               운영 안정성과 서비스 품질을 모두 높였습니다.
               처음 방문한 고객도 어렵지 않게 즐길 수 있는 이유입니다.
@@ -82,7 +82,7 @@ export default function WhyDetail() {
         {/* ── 2) QR 주문 및 조리 시스템 — 핸드폰 프레임 스크롤링 ── */}
         <div
           className="grid md:grid-cols-2 gap-10 items-center mb-16"
-          style={{ opacity: inView ? 1 : 0, transition: "all 0.8s ease 0.3s" }}
+          style={{ opacity: inView ? 1 : 0, transition: "all 0.85s cubic-bezier(0.16,1,0.3,1) 0.3s" }}
         >
           {/* 핸드폰 프레임 */}
           <div className="flex justify-center order-2 md:order-1">
@@ -104,14 +104,14 @@ export default function WhyDetail() {
           </div>
 
           <div className="order-1 md:order-2">
-            <p className="text-[#E41220] text-xs font-bold mb-3">DETAIL 02</p>
-            <h3 className="text-3xl md:text-4xl font-black text-[#111] mb-5 leading-snug">
+            <p className="text-[#E41220] text-sm font-bold mb-3">DETAIL 02</p>
+            <h3 className="text-2xl md:text-3xl font-black text-[#111] mb-5 leading-snug">
               QR 주문 및 조리 시스템
             </h3>
-            <p className="text-gray-500 leading-[1.9] text-base mb-4">
+            <p className="text-gray-500 leading-[1.9] text-lg mb-4">
               동종 업계에서 보기 어려운 <strong className="text-[#111]">QR 주문과 즉시 조리 시스템</strong>을 운영합니다.
             </p>
-            <p className="text-gray-500 leading-[1.9] text-base">
+            <p className="text-gray-500 leading-[1.9] text-lg">
               룸에서 나가지 않고 QR로 주문하면 즉시 조리가 시작됩니다.
               주문 편의성과 F&B 만족도를 모두 확보한 온스팟만의 차별점입니다.
             </p>
@@ -119,11 +119,11 @@ export default function WhyDetail() {
         </div>
 
         {/* ── 조리메뉴 갤러리 ── */}
-        <div style={{ opacity: inView ? 1 : 0, transition: "all 0.8s ease 0.4s" }}>
+        <div style={{ opacity: inView ? 1 : 0, transition: "all 0.85s cubic-bezier(0.16,1,0.3,1) 0.4s" }}>
           <div className="text-center mb-8">
-            <p className="text-[#E41220] text-xs font-bold uppercase tracking-widest mb-2">ONSPOT MENU</p>
+            <p className="text-[#E41220] text-sm font-bold uppercase tracking-widest mb-2">ONSPOT MENU</p>
             <h3 className="text-2xl md:text-3xl font-black text-[#111]">직원이 직접 조리하는 메뉴</h3>
-            <p className="text-gray-400 text-sm mt-2">갓 조리한 분식부터 든든한 덮밥, 카페 음료까지</p>
+            <p className="text-gray-400 text-base mt-2">갓 조리한 분식부터 든든한 덮밥, 카페 음료까지</p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
             {cookedMenuPhotos.map((m, i) => (
@@ -136,18 +136,18 @@ export default function WhyDetail() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent" />
                 {m.tag && (
-                  <span className="absolute top-3 left-3 bg-[#E41220] text-white text-[10px] font-black rounded-full px-2.5 py-1 shadow">
+                  <span className="absolute top-3 left-3 bg-[#E41220] text-white text-sm font-black rounded-full px-2.5 py-1 shadow">
                     {m.tag}
                   </span>
                 )}
                 <div className="absolute left-0 right-0 bottom-0 p-3.5 md:p-4">
-                  <p className="text-white/60 text-[11px] font-bold mb-0.5">{m.cat}</p>
+                  <p className="text-white/60 text-sm font-bold mb-0.5">{m.cat}</p>
                   <p className="text-white font-black text-base md:text-lg leading-tight drop-shadow">{m.label}</p>
                 </div>
               </div>
             ))}
           </div>
-          <p className="text-gray-400 text-xs text-center mt-6">* 스낵바 외 다양한 직원 조리 메뉴를 제공합니다</p>
+          <p className="text-gray-400 text-sm text-center mt-6">* 스낵바 외 다양한 직원 조리 메뉴를 제공합니다</p>
         </div>
 
       </div>

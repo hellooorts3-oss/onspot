@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
-import ThemeToggle from "./ThemeToggle";
 
 /* PDF 기획안: 상단메뉴 — 브랜드 스토리 / Why ONSPOT? / 가맹절차 / 지점찾기 */
 const navItems = [
@@ -27,7 +26,7 @@ export default function Header() {
         scrolled ? "bg-white shadow-md py-3" : "bg-transparent py-5"
       }`}
     >
-      <div className="max-w-6xl mx-auto px-4 flex items-center justify-between">
+      <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
         {/* Logo — 브랜드 가로형 워드마크 */}
         <a href="#" className="flex items-center">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -39,34 +38,28 @@ export default function Header() {
         </a>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-6">
+        <nav className="hidden md:flex items-center gap-8">
           {navItems.map((item) => (
             <a
               key={item.href}
               href={item.href}
-              className={`text-sm font-medium transition-colors hover:text-[#E41220] ${
+              className={`text-base font-semibold transition-colors hover:text-[#E41220] ${
                 scrolled ? "text-[#333]" : "text-white/90"
               }`}
             >
               {item.label}
             </a>
           ))}
-          {/* 배경 토글 (기본/블랙) */}
-          <div className="flex items-center gap-1.5">
-            <span className={`text-[10px] font-bold ${scrolled ? "text-gray-400" : "text-white/60"}`}>배경</span>
-            <ThemeToggle />
-          </div>
           <a
             href="/#contact"
-            className="px-4 py-2 bg-[#E41220] text-white text-sm font-bold rounded-full hover:bg-[#b50e1a] transition-colors"
+            className="px-6 py-2.5 bg-[#E41220] text-white text-base font-bold rounded-full hover:bg-[#b50e1a] transition-colors"
           >
             창업 문의
           </a>
         </nav>
 
-        {/* Mobile: 배경 전환 + 메뉴 버튼 (순서 전환은 드롭다운 안에) */}
+        {/* Mobile: 메뉴 버튼 */}
         <div className="flex md:hidden items-center gap-3">
-          <ThemeToggle />
           <button
             className={scrolled ? "text-[#111]" : "text-white"}
             onClick={() => setMenuOpen(!menuOpen)}
@@ -86,7 +79,7 @@ export default function Header() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setMenuOpen(false)}
-                className="block py-2.5 px-3 text-[#333] font-medium text-sm hover:text-[#E41220] hover:bg-red-50 rounded-lg transition-colors"
+                className="block py-2.5 px-3 text-[#333] font-semibold text-base hover:text-[#E41220] hover:bg-red-50 rounded-lg transition-colors"
               >
                 {item.label}
               </a>
@@ -94,7 +87,7 @@ export default function Header() {
             <a
               href="/#contact"
               onClick={() => setMenuOpen(false)}
-              className="block py-2.5 px-3 bg-[#E41220] text-white font-bold text-sm rounded-lg text-center mt-2"
+              className="block py-3 px-3 bg-[#E41220] text-white font-bold text-base rounded-lg text-center mt-2"
             >
               창업 문의하기
             </a>

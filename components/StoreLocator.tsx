@@ -47,13 +47,13 @@ export default function StoreLocator() {
         <div
           ref={ref}
           className="mb-12"
-          style={{ opacity: inView ? 1 : 0, transform: inView ? "none" : "translateY(30px)", transition: "all 0.8s ease" }}
+          style={{ opacity: inView ? 1 : 0, transform: inView ? "none" : "translateY(46px)", transition: "all 0.85s cubic-bezier(0.16,1,0.3,1)" }}
         >
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-            <h2 className="text-5xl md:text-6xl font-black text-[#111] leading-[1.05]">
+            <h2 className="text-4xl md:text-5xl font-black text-[#111] leading-[1.05]">
               가까운 온스팟<br />찾아보기
             </h2>
-            <p className="text-gray-400 text-base max-w-xs">
+            <p className="text-gray-400 text-lg max-w-xs">
               전국으로 확장 중인 온스팟,<br />우리 동네 지점을 확인하세요
             </p>
           </div>
@@ -61,7 +61,7 @@ export default function StoreLocator() {
 
         <div
           className="grid md:grid-cols-[320px_1fr] gap-0 rounded-3xl overflow-hidden shadow-sm bg-white"
-          style={{ opacity: inView ? 1 : 0, transition: "all 0.8s ease 0.2s" }}
+          style={{ opacity: inView ? 1 : 0, transition: "all 0.85s cubic-bezier(0.16,1,0.3,1) 0.2s" }}
         >
           {/* ── 좌측: 검색 + 지점 리스트 ── */}
           <div className="border-r border-gray-100 flex flex-col">
@@ -97,7 +97,7 @@ export default function StoreLocator() {
                         <span className="font-bold text-[#111] text-sm">온스팟 {s.name}</span>
                       </div>
                       <span
-                        className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                        className={`text-sm font-bold px-2 py-0.5 rounded-full ${
                           s.status === "영업중"
                             ? "bg-[#E41220] text-white"
                             : "bg-gray-100 text-gray-400"
@@ -106,7 +106,7 @@ export default function StoreLocator() {
                         {s.status}
                       </span>
                     </div>
-                    <p className="text-gray-400 text-xs mt-1 ml-6">{s.region}</p>
+                    <p className="text-gray-400 text-sm mt-1 ml-6">{s.region}</p>
                   </button>
                 ))
               )}
@@ -125,12 +125,12 @@ export default function StoreLocator() {
             />
             <div className="absolute top-4 left-4 bg-white/95 backdrop-blur rounded-xl shadow-md px-4 py-3">
               <p className="font-black text-[#111] text-sm">온스팟 {selected.name}</p>
-              <p className="text-gray-400 text-xs">{selected.region} · {selected.status}</p>
+              <p className="text-gray-400 text-sm">{selected.region} · {selected.status}</p>
             </div>
           </div>
         </div>
 
-        <p className="text-gray-300 text-[11px] mt-4">
+        <p className="text-gray-300 text-sm mt-4">
           * 지점 위치는 인근 지역 기준 표시이며, 정확한 주소는 확정 후 업데이트됩니다.
         </p>
 

@@ -82,14 +82,14 @@ export default function BrandStory() {
         <div
           ref={ref}
           className="mb-16"
-          style={{ opacity: inView ? 1 : 0, transform: inView ? "none" : "translateY(30px)", transition: "all 0.8s ease" }}
+          style={{ opacity: inView ? 1 : 0, transform: inView ? "none" : "translateY(46px)", transition: "all 0.85s cubic-bezier(0.16,1,0.3,1)" }}
         >
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-            <h2 className="text-5xl md:text-6xl font-black text-[#111] leading-[1.05]">
+            <h2 className="text-4xl md:text-5xl font-black text-[#111] leading-[1.05]">
               새로운 놀이문화에<br />
               <span className="text-[#E41220]">출사표를 던지다</span>
             </h2>
-            <p className="text-gray-400 text-base leading-relaxed max-w-sm md:text-right">
+            <p className="text-gray-400 text-lg leading-relaxed max-w-sm md:text-right">
               가장 빨리 성장하고 있는{" "}
               <span
                 className="font-bold text-[#111]"
@@ -103,42 +103,34 @@ export default function BrandStory() {
           </div>
         </div>
 
-        {/* ── 출사표 본문 + 메인 일러스트 ── */}
+        {/* ── 출사표 본문 + 핵심 지표(글래스모피즘 카드) ── */}
         <div
-          className="mb-24 grid md:grid-cols-2 gap-12 items-center"
-          style={{ opacity: inView ? 1 : 0, transition: "all 0.8s ease 0.15s" }}
+          className="mb-24"
+          style={{ opacity: inView ? 1 : 0, transform: inView ? "none" : "translateY(46px)", transition: "all 0.85s cubic-bezier(0.16,1,0.3,1) 0.15s" }}
         >
-          <div>
-            <p className="text-gray-600 leading-[1.9] text-lg mb-8">
-              <strong className="text-[#111]">3개의 직영 테스트 매장</strong>에서 사업성 검증은 이미 완료되었습니다.
-              직영점에서 먼저 운영하고, 지속적인 매출 모니터링으로 다듬어진
-              <strong className="text-[#111]"> 완성된 형태의 온스팟</strong>으로 업계 1위에 도전합니다.
-            </p>
-            <div className="grid grid-cols-3 gap-3">
-              {[
-                { value: "3개", label: "직영 테스트 매장" },
-                { value: "검증 완료", label: "사업성 검증" },
-                { value: "업계 1위", label: "온스팟의 목표" },
-              ].map((s, i) => (
-                <div
-                  key={i}
-                  className="text-center bg-gray-50 rounded-2xl px-3 py-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
-                >
-                  <div className="text-lg font-black text-[#E41220]">{s.value}</div>
-                  <div className="text-[11px] text-gray-400 mt-1">{s.label}</div>
+          <p className="text-gray-600 leading-[1.9] text-lg mb-10 max-w-3xl">
+            <strong className="text-[#111]">3개의 직영 테스트 매장</strong>에서 사업성 검증은 이미 완료되었습니다.
+            직영점에서 먼저 운영하고, 지속적인 매출 모니터링으로 다듬어진
+            <strong className="text-[#111]"> 완성된 형태의 온스팟</strong>으로 업계 1위에 도전합니다.
+          </p>
+          <div className={`grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-5 anim-seq ${inView ? "is-in" : ""}`}>
+            {[
+              { value: "3개", label: "직영 테스트 매장" },
+              { value: "검증 완료", label: "사업성 검증" },
+              { value: "업계 1위", label: "온스팟의 목표" },
+            ].map((s, i) => (
+              <div
+                key={i}
+                className="group relative overflow-hidden rounded-2xl border border-[#E41220]/25 bg-gradient-to-br from-[#E41220]/22 via-[#E41220]/8 to-transparent backdrop-blur-md px-6 py-7 shadow-[0_10px_40px_-12px_rgba(228,18,32,0.45)] transition-all duration-300 hover:-translate-y-1 hover:border-[#E41220]/55"
+              >
+                {/* 글래스 상단 하이라이트 */}
+                <span className="pointer-events-none absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/12 to-transparent" aria-hidden="true" />
+                <div className="relative">
+                  <div className="text-2xl md:text-3xl font-black text-[#E41220] leading-none">{s.value}</div>
+                  <div className="text-sm text-gray-400 mt-2">{s.label}</div>
                 </div>
-              ))}
-            </div>
-          </div>
-          {/* 메인 일러스트 — 깃발을 꽂는 도전 */}
-          <div
-            style={{
-              opacity: inView ? 1 : 0,
-              transform: inView ? "none" : "translateY(20px) scale(0.97)",
-              transition: "all 0.9s ease 0.3s",
-            }}
-          >
-            <Illust src="/images/story-flag.png" label="새로운 시장에 출사표" ratio="4/3" bg="bg-transparent" />
+              </div>
+            ))}
           </div>
         </div>
 
@@ -146,12 +138,12 @@ export default function BrandStory() {
         <div className="mb-16 rounded-[2rem] bg-[#0f0f0f] px-6 md:px-12 py-14 md:py-16">
           <div
             className="text-center mb-10"
-            style={{ opacity: inView ? 1 : 0, transition: "all 0.8s ease 0.25s" }}
+            style={{ opacity: inView ? 1 : 0, transition: "all 0.85s cubic-bezier(0.16,1,0.3,1) 0.25s" }}
           >
-            <h3 className="text-3xl md:text-4xl font-black text-white">
+            <h3 className="text-4xl md:text-5xl font-black text-white leading-[1.05]">
               프랜차이즈 업계의 <span className="text-[#ff4655]">불합리함을 느끼다</span>
             </h3>
-            <p className="text-white/40 text-base mt-3">기존 업체들의 문제점</p>
+            <p className="text-white/40 text-lg mt-3">기존 업체들의 문제점</p>
           </div>
           <div className="grid md:grid-cols-3 gap-5">
             {problems.map((p, i) => (
@@ -160,8 +152,8 @@ export default function BrandStory() {
                 className="bg-white/[0.04] border border-white/10 rounded-3xl p-7 group transition-all duration-300 hover:-translate-y-1.5 hover:bg-white/[0.07]"
                 style={{
                   opacity: inView ? 1 : 0,
-                  transform: inView ? "none" : "translateY(20px)",
-                  transition: `all 0.6s ease ${0.3 + i * 0.12}s`,
+                  transform: inView ? "none" : "translateY(40px)",
+                  transition: `all 0.7s cubic-bezier(0.16,1,0.3,1) ${0.3 + i * 0.12}s`,
                 }}
               >
                 {/* 일러스트 */}
@@ -171,11 +163,11 @@ export default function BrandStory() {
                   </div>
                 </div>
                 <div className="flex items-center gap-2 mb-3">
-                  <span className="w-5 h-5 rounded-full bg-[#E41220] text-white text-[10px] font-black flex items-center justify-center">!</span>
-                  <span className="text-[#E41220] text-xs font-bold">{p.no}</span>
+                  <span className="w-5 h-5 rounded-full bg-[#E41220] text-white text-sm font-black flex items-center justify-center">!</span>
+                  <span className="text-[#E41220] text-sm font-bold">{p.no}</span>
                 </div>
-                <h4 className="font-black text-white text-xl mb-3">{p.title}</h4>
-                <p className="text-white/50 text-sm leading-relaxed">{p.desc}</p>
+                <h4 className="font-black text-white text-lg md:text-xl mb-3">{p.title}</h4>
+                <p className="text-white/50 text-base leading-relaxed">{p.desc}</p>
               </div>
             ))}
           </div>
@@ -185,68 +177,48 @@ export default function BrandStory() {
         <div>
           <div
             className="text-center mb-16"
-            style={{ opacity: inView ? 1 : 0, transition: "all 0.8s ease 0.4s" }}
+            style={{ opacity: inView ? 1 : 0, transition: "all 0.85s cubic-bezier(0.16,1,0.3,1) 0.4s" }}
           >
-            <span className="inline-block bg-[#E41220] text-white text-xs font-black rounded-full px-4 py-1.5 mb-4 tracking-wide">
+            <span className="inline-block bg-[#E41220] text-white text-sm font-black rounded-full px-4 py-1.5 mb-4 tracking-wide">
               ONSPOT PROMISE
             </span>
-            <h3 className="text-3xl md:text-4xl font-black text-[#111]">
+            <h3 className="text-4xl md:text-5xl font-black text-[#111] leading-[1.05]">
               <span className="text-[#E41220]">온스팟의 약속</span>
             </h3>
-            <p className="text-gray-500 text-base mt-3">가맹점주님과 진심으로 함께 성장합니다</p>
+            <p className="text-gray-500 text-lg mt-3">가맹점주님과 진심으로 함께 성장합니다</p>
           </div>
 
-          <div className="space-y-20 md:space-y-28">
-            {promises.map((p, i) => {
-              const reverse = i % 2 === 1;
-              return (
-                <div key={i} className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
-                  {/* 비주얼 패널 — 따뜻한 베이지 배경 + 워터마크 + 기울어진 일러스트 */}
-                  <div
-                    className={`relative px-4 pt-2 pb-12 md:pb-16 ${reverse ? "md:order-2" : ""}`}
-                    style={{
-                      opacity: inView ? 1 : 0,
-                      transform: inView ? "none" : `translateX(${reverse ? 40 : -40}px)`,
-                      transition: `all 0.8s ease ${0.5 + i * 0.15}s`,
-                    }}
-                  >
-                    {/* 대형 워터마크 텍스트 */}
-                    <span
-                      className="absolute bottom-3 left-0 right-0 z-20 text-center font-black tracking-tighter select-none pointer-events-none text-[#111] whitespace-nowrap"
-                      style={{ fontSize: "clamp(3rem, 6.5vw, 5rem)", opacity: 0.05, lineHeight: 1 }}
-                      aria-hidden="true"
-                    >
-                      PROMISE 0{i + 1}
+          <div className={`grid md:grid-cols-3 gap-5 md:gap-6 items-stretch anim-seq ${inView ? "is-in" : ""}`}>
+            {promises.map((p, i) => (
+              <div
+                key={i}
+                className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#E41220] to-[#b50e1a] text-left px-7 py-8 shadow-[0_16px_46px_-16px_rgba(228,18,32,0.65)] transition-transform duration-300 hover:-translate-y-1.5"
+              >
+                {/* 글래스 상단 하이라이트 */}
+                <span className="pointer-events-none absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/15 to-transparent" aria-hidden="true" />
+                {/* 대형 워터마크 순번 */}
+                <span
+                  className="absolute -bottom-4 right-2 z-0 font-black tracking-tighter select-none pointer-events-none text-white whitespace-nowrap"
+                  style={{ fontSize: "clamp(4rem, 9vw, 6rem)", opacity: 0.1, lineHeight: 1 }}
+                  aria-hidden="true"
+                >
+                  0{i + 1}
+                </span>
+                <div className="relative z-10">
+                  {/* 체크 + 순번 배지 */}
+                  <div className="flex items-center gap-2 mb-5">
+                    <span className="flex items-center justify-center w-6 h-6 rounded-full bg-white text-[#E41220] shrink-0">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>
                     </span>
-                    <div
-                      className={`relative z-0 transition-transform duration-500 hover:rotate-0 ${
-                        reverse ? "rotate-2" : "-rotate-2"
-                      }`}
-                    >
-                      <Illust src={p.img} label={p.title} bg="bg-transparent" ratio="4/3" />
-                    </div>
+                    <span className="text-white font-black text-base">{p.no}</span>
                   </div>
-
-                  {/* 텍스트 */}
-                  <div
-                    className={reverse ? "md:order-1" : ""}
-                    style={{
-                      opacity: inView ? 1 : 0,
-                      transform: inView ? "none" : `translateX(${reverse ? -30 : 30}px)`,
-                      transition: `all 0.8s ease ${0.6 + i * 0.15}s`,
-                    }}
-                  >
-                    <span className="inline-block bg-[#E41220] text-white text-xs font-black rounded-full px-4 py-1.5 mb-6 tracking-wide">
-                      약속 {i + 1}
-                    </span>
-                    <h4 className="text-3xl md:text-4xl font-black text-[#111] leading-snug mb-5 whitespace-pre-line">
-                      {p.title}
-                    </h4>
-                    <p className="text-gray-500 text-base md:text-lg leading-[1.9] whitespace-pre-line">{p.desc}</p>
-                  </div>
+                  <h4 className="text-xl md:text-2xl font-black text-white leading-snug mb-4 whitespace-pre-line">
+                    {p.title}
+                  </h4>
+                  <p className="text-white/85 text-base leading-relaxed whitespace-pre-line">{p.desc}</p>
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
         </div>
 

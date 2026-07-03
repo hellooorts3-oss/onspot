@@ -57,7 +57,7 @@ export default function PopupModal() {
                   <span className="w-2 h-2 rounded-full bg-[#E41220] inline-block" />
                   <span className="font-semibold text-[#111] text-sm">{loc.name}</span>
                 </div>
-                <span className="text-xs font-bold text-[#E41220] bg-red-50 px-2 py-1 rounded-full">
+                <span className="text-sm font-bold text-[#E41220] bg-red-50 px-2 py-1 rounded-full">
                   {loc.status}
                 </span>
               </div>

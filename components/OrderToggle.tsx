@@ -8,7 +8,7 @@ export default function OrderToggle() {
 
   return (
     <div
-      className="flex items-center rounded-full border border-[#E41220]/45 overflow-hidden text-[11px] font-bold select-none shrink-0"
+      className="flex items-center rounded-full border border-[#E41220]/45 overflow-hidden text-sm font-bold select-none shrink-0"
       role="group"
       aria-label="섹션 순서 전환"
     >

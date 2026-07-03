@@ -40,12 +40,13 @@ export default function FloatingButtons() {
       {/* Main toggle button */}
       <button
         onClick={() => setOpen(!open)}
-        className="w-14 h-14 bg-[#E41220] rounded-full flex items-center justify-center text-white shadow-xl hover:bg-[#b50e1a] transition-all hover:scale-105"
+        aria-label="창업 문의"
+        className={`w-[72px] h-[72px] bg-[#E41220] rounded-full flex items-center justify-center text-white shadow-xl shadow-[#E41220]/30 hover:bg-[#b50e1a] transition-colors ${open ? "" : "float-bounce"}`}
       >
-        {open ? <X size={22} /> : (
+        {open ? <X size={30} /> : (
           <div className="flex flex-col items-center justify-center">
-            <MessageCircle size={20} />
-            <span className="text-[8px] font-bold mt-0.5">문의</span>
+            <MessageCircle size={28} />
+            <span className="text-[12px] font-bold mt-0.5">문의</span>
           </div>
         )}
       </button>

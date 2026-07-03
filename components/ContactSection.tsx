@@ -27,14 +27,14 @@ export default function ContactSection() {
 
   return (
     <section id="contact" className="py-24 bg-[#0a0a0a]">
-      <div className="max-w-5xl mx-auto px-4">
+      <div className="max-w-6xl mx-auto px-6">
         <div
           ref={ref}
           className="grid md:grid-cols-2 gap-16"
           style={{
             opacity: inView ? 1 : 0,
-            transform: inView ? "none" : "translateY(30px)",
-            transition: "all 0.7s ease",
+            transform: inView ? "none" : "translateY(46px)",
+            transition: "all 0.8s cubic-bezier(0.16,1,0.3,1)",
           }}
         >
           {/* Left */}
@@ -57,7 +57,7 @@ export default function ContactSection() {
                   📞
                 </div>
                 <div>
-                  <div className="text-white/40 text-xs">전화 상담 (모바일에서만 작동)</div>
+                  <div className="text-white/40 text-sm">전화 상담 (모바일에서만 작동)</div>
                   <a href="tel:00000000" className="text-white font-bold hover:text-[#E41220] transition-colors">0000-0000</a>
                 </div>
               </div>
@@ -67,7 +67,7 @@ export default function ContactSection() {
                   💬
                 </div>
                 <div>
-                  <div className="text-white/40 text-xs">카카오톡 채널 (링크 추가 예정)</div>
+                  <div className="text-white/40 text-sm">카카오톡 채널 (링크 추가 예정)</div>
                   <div className="text-white font-bold">@온스팟 창업문의</div>
                 </div>
               </div>
@@ -76,7 +76,7 @@ export default function ContactSection() {
                   📧
                 </div>
                 <div>
-                  <div className="text-white/40 text-xs">이메일</div>
+                  <div className="text-white/40 text-sm">이메일</div>
                   <div className="text-white font-bold">holicmst@the-holic.kr</div>
                 </div>
               </div>
@@ -85,7 +85,7 @@ export default function ContactSection() {
                   📸
                 </div>
                 <div>
-                  <div className="text-white/40 text-xs">인스타그램</div>
+                  <div className="text-white/40 text-sm">인스타그램</div>
                   <a
                     href="https://www.instagram.com/official_onspot/"
                     target="_blank"
@@ -115,7 +115,7 @@ export default function ContactSection() {
                 className="bg-white/5 border border-white/10 rounded-2xl p-6 space-y-4"
               >
                 <div>
-                  <label className="text-white/60 text-xs font-medium block mb-1.5">
+                  <label className="text-white/60 text-sm font-medium block mb-1.5">
                     성함 *
                   </label>
                   <input
@@ -128,7 +128,7 @@ export default function ContactSection() {
                   />
                 </div>
                 <div>
-                  <label className="text-white/60 text-xs font-medium block mb-1.5">
+                  <label className="text-white/60 text-sm font-medium block mb-1.5">
                     연락처 *
                   </label>
                   <input
@@ -141,7 +141,7 @@ export default function ContactSection() {
                   />
                 </div>
                 <div>
-                  <label className="text-white/60 text-xs font-medium block mb-1.5">
+                  <label className="text-white/60 text-sm font-medium block mb-1.5">
                     희망 창업 지역
                   </label>
                   <input
@@ -153,7 +153,7 @@ export default function ContactSection() {
                   />
                 </div>
                 <div>
-                  <label className="text-white/60 text-xs font-medium block mb-1.5">
+                  <label className="text-white/60 text-sm font-medium block mb-1.5">
                     문의 내용
                   </label>
                   <textarea
@@ -170,7 +170,7 @@ export default function ContactSection() {
                 >
                   창업 문의 보내기
                 </button>
-                <p className="text-white/30 text-xs text-center">
+                <p className="text-white/30 text-sm text-center">
                   입력하신 정보는 창업 상담 목적으로만 사용됩니다
                 </p>
               </form>

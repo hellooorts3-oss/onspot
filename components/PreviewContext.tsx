@@ -2,7 +2,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
 /* 섹션 순서 미리보기 상태. '신규'(기본) ↔ '기존'(원래 순서) 전환을 헤더 토글과
-   섹션 렌더러가 공유한다. (배경 라이트/다크는 ThemeToggle 이 따로 처리) */
+   섹션 렌더러가 공유한다. (배경은 블랙 버전 단일 고정) */
 export type SectionOrder = "new" | "original";
 
 const OrderContext = createContext<{

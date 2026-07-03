@@ -42,11 +42,11 @@ export default function FranchiseCost() {
         <div
           ref={ref}
           className="grid md:grid-cols-2 gap-10 md:gap-14 items-start"
-          style={{ opacity: inView ? 1 : 0, transform: inView ? "none" : "translateY(30px)", transition: "all 0.8s ease" }}
+          style={{ opacity: inView ? 1 : 0, transform: inView ? "none" : "translateY(46px)", transition: "all 0.85s cubic-bezier(0.16,1,0.3,1)" }}
         >
           {/* 왼쪽: 제목 + 설명 + 스탯 */}
           <div className="space-y-7">
-            <h2 className="text-5xl md:text-6xl font-black text-white leading-[1.05]">
+            <h2 className="text-4xl md:text-5xl font-black text-white leading-[1.05]">
               업계 최저<br />
               <span className="text-[#E41220]">창업비용과 로열티</span>
             </h2>
@@ -58,25 +58,25 @@ export default function FranchiseCost() {
 
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-[#161616] border border-white/10 rounded-2xl p-6">
-                <p className="text-white/40 text-xs mb-2.5">A사 대비 최대 절감</p>
+                <p className="text-white/40 text-sm mb-2.5">A사 대비 최대 절감</p>
                 <div className="text-3xl md:text-4xl font-black text-white tabular-nums leading-none">
                   9,200<span className="text-base font-bold ml-0.5">만원</span>
                 </div>
-                <p className="text-[#E41220] text-xs font-black mt-2.5">약 27% 절감 ↓</p>
+                <p className="text-[#E41220] text-sm font-black mt-2.5">약 27% 절감 ↓</p>
               </div>
               <div className="bg-[#2a0e11] border border-[#E41220]/45 rounded-2xl p-6">
-                <p className="text-white/50 text-xs mb-2.5">온스팟 총 창업비용</p>
+                <p className="text-white/50 text-sm mb-2.5">온스팟 총 창업비용</p>
                 <div className="text-3xl md:text-4xl font-black text-[#E41220] tabular-nums leading-none">
                   25,100<span className="text-base font-bold ml-0.5">만원</span>
                 </div>
-                <p className="text-white/35 text-[11px] mt-2.5">VAT별도 · 70평 기준</p>
+                <p className="text-white/35 text-sm mt-2.5">VAT별도 · 70평 기준</p>
               </div>
             </div>
           </div>
 
           {/* 오른쪽: 비교표 */}
           <div>
-            <p className="text-white/30 text-xs text-right mb-2.5">단위: 만원 (70평 기준)</p>
+            <p className="text-white/30 text-sm text-right mb-2.5">단위: 만원 (70평 기준)</p>
             <div className="relative rounded-3xl overflow-hidden border border-white/10 bg-[#141414] table-glow">
               {/* 헤더 행 */}
               <div className={COLS}>

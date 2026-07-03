@@ -23,7 +23,7 @@ function CirclePlaceholder({ label, size = "w-full" }: { label: string; size?: s
         <circle cx="8.5" cy="8.5" r="1.5" stroke="currentColor" strokeWidth="1.5"/>
         <path d="M21 15l-5-5L5 21" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
-      <span className="text-gray-300 text-[10px] text-center px-4 leading-tight">{label}</span>
+      <span className="text-gray-300 text-sm text-center px-4 leading-tight">{label}</span>
     </div>
   );
 }
@@ -46,11 +46,11 @@ export default function BrandIntro() {
         <div
           ref={ref}
           className="mb-20"
-          style={{ opacity: inView ? 1 : 0, transform: inView ? "none" : "translateY(30px)", transition: "all 0.8s ease" }}
+          style={{ opacity: inView ? 1 : 0, transform: inView ? "none" : "translateY(46px)", transition: "all 0.85s cubic-bezier(0.16,1,0.3,1)" }}
         >
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
             <div>
-              <p className="text-[#E41220] font-bold text-xs tracking-[0.2em] uppercase mb-4">
+              <p className="text-[#E41220] font-bold text-sm tracking-[0.2em] uppercase mb-4">
                 02 — 브랜드 소개
               </p>
               <h2 className="text-4xl md:text-5xl font-black text-[#111] leading-[1.05]">
@@ -58,7 +58,7 @@ export default function BrandIntro() {
                 <span className="text-[#E41220]">동시에.</span>
               </h2>
             </div>
-            <p className="text-gray-400 text-sm leading-relaxed max-w-xs md:text-right">
+            <p className="text-gray-400 text-lg leading-relaxed max-w-xs md:text-right">
               OTT + 콘솔 게임 + F&B 결합형<br />
               24시간 프라이빗 체류형 공간
             </p>
@@ -72,7 +72,7 @@ export default function BrandIntro() {
         {/* ── 메인 2컬럼 — 이미지 왼쪽, 텍스트 오른쪽 ── */}
         <div
           className="grid md:grid-cols-2 gap-16 items-center mb-28"
-          style={{ opacity: inView ? 1 : 0, transition: "all 0.8s ease 0.2s" }}
+          style={{ opacity: inView ? 1 : 0, transition: "all 0.85s cubic-bezier(0.16,1,0.3,1) 0.2s" }}
         >
           {/* 원형 이미지 + 떠있는 서브카드 */}
           <div className="relative flex justify-center">
@@ -82,25 +82,25 @@ export default function BrandIntro() {
             {/* 떠있는 수치 카드 */}
             <div className="absolute -bottom-4 -right-4 bg-[#E41220] text-white rounded-2xl px-5 py-4 shadow-xl">
               <div className="text-2xl font-black">65%+</div>
-              <div className="text-xs text-white/70">평균 순수익률</div>
+              <div className="text-sm text-white/70">평균 순수익률</div>
             </div>
             <div className="absolute -top-4 -left-4 bg-white border border-gray-100 rounded-2xl px-4 py-3 shadow-lg">
               <div className="text-lg font-black text-[#111]">24H</div>
-              <div className="text-xs text-gray-400">연중무휴 운영</div>
+              <div className="text-sm text-gray-400">연중무휴 운영</div>
             </div>
           </div>
 
           {/* 텍스트 */}
           <div>
-            <p className="text-gray-600 leading-[1.9] text-base mb-6">
+            <p className="text-gray-600 leading-[1.9] text-lg mb-6">
               온스팟은 OTT 콘텐츠, 콘솔 게임(닌텐도와 PS5), 유식, F&B를 결합한
               <strong className="text-[#111]"> 24시간 프라이빗 체류형 멀티 콘텐츠 공간</strong>입니다.
             </p>
-            <p className="text-gray-600 leading-[1.9] text-base mb-6">
+            <p className="text-gray-600 leading-[1.9] text-lg mb-6">
               단순 방문형 매장이 아닌, 고객이 오랜 시간 머무르며 다양한 활동을 동시에
               즐길 수 있도록 설계된 공간으로, <strong className="text-[#111]">체류시간 증가와 높은 만족도를 동시에 제공</strong>합니다.
             </p>
-            <p className="text-gray-600 leading-[1.9] text-base mb-10">
+            <p className="text-gray-600 leading-[1.9] text-lg mb-10">
               남녀노소 누구나 이용 가능하며, 커플·친구·가족 단위 고객까지 폭넓게 이용 가능합니다.
             </p>
 
@@ -111,7 +111,7 @@ export default function BrandIntro() {
                   <span className="text-2xl font-black text-gray-100 group-hover:text-[#E41220] transition-colors w-8 text-right select-none">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span className="text-[#111] font-bold text-base">{s}</span>
+                  <span className="text-[#111] font-bold text-lg">{s}</span>
                 </div>
               ))}
             </div>
@@ -120,7 +120,7 @@ export default function BrandIntro() {
 
         {/* ── 4 포인트 — 자유로운 레이아웃 ── */}
         <div>
-          <p className="text-gray-300 text-xs font-bold uppercase tracking-widest mb-10 text-center">
+          <p className="text-gray-300 text-sm font-bold uppercase tracking-widest mb-10 text-center">
             온스팟 포인트
           </p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -131,7 +131,7 @@ export default function BrandIntro() {
                 style={{
                   opacity: inView ? 1 : 0,
                   transform: inView ? `translateY(0)` : `translateY(${20 + i * 5}px)`,
-                  transition: `all 0.7s ease ${0.3 + i * 0.12}s`,
+                  transition: `all 0.8s cubic-bezier(0.16,1,0.3,1) ${0.3 + i * 0.12}s`,
                 }}
               >
                 {/* 원형 이미지 placeholder */}
@@ -139,7 +139,7 @@ export default function BrandIntro() {
                   <CirclePlaceholder label={p.label} />
                 </div>
                 <h3 className="font-black text-[#111] text-sm mb-1.5">{p.title}</h3>
-                <p className="text-gray-400 text-xs leading-relaxed whitespace-pre-line">{p.desc}</p>
+                <p className="text-gray-400 text-base leading-relaxed whitespace-pre-line">{p.desc}</p>
               </div>
             ))}
           </div>

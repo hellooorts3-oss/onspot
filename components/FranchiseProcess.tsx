@@ -36,19 +36,19 @@ function StepCard({ s, inView }: { s: Step; inView: boolean }) {
       className="h-full bg-white border border-gray-100 rounded-2xl p-5 shadow-sm hover:shadow-md"
       style={{
         opacity: inView ? 1 : 0,
-        transform: inView ? "none" : "translateY(16px) scale(0.98)",
+        transform: inView ? "none" : "translateY(34px) scale(0.98)",
         transition: `opacity 0.4s ease ${(order * 0.12).toFixed(2)}s, transform 0.4s ease ${(order * 0.12).toFixed(2)}s, box-shadow 0.3s ease`,
       }}
     >
       <div className="flex items-center justify-between mb-3">
-        <span className="inline-flex items-center justify-center h-7 px-3 rounded-full bg-[#E41220] text-white text-[11px] font-black tracking-wide">
+        <span className="inline-flex items-center justify-center h-7 px-3 rounded-full bg-[#E41220] text-white text-sm font-black tracking-wide">
           STEP {s.step}
         </span>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={s.icon} alt="" className="w-14 h-14 object-contain" />
       </div>
       <h3 className="font-black text-[#111] text-base md:text-lg mb-1.5 leading-snug">{s.title}</h3>
-      <p className="text-gray-400 text-xs md:text-sm leading-relaxed">{s.desc}</p>
+      <p className="text-gray-400 text-base leading-relaxed">{s.desc}</p>
     </div>
   );
 }
@@ -98,20 +98,20 @@ export default function FranchiseProcess() {
 
   return (
     <section id="process" className="relative py-28 bg-white overflow-hidden">
-      <div className="relative max-w-5xl mx-auto px-6">
+      <div className="relative max-w-6xl mx-auto px-6">
 
         <div
           ref={ref}
           className="mb-16"
-          style={{ opacity: inView ? 1 : 0, transform: inView ? "none" : "translateY(30px)", transition: "all 0.8s ease" }}
+          style={{ opacity: inView ? 1 : 0, transform: inView ? "none" : "translateY(46px)", transition: "all 0.85s cubic-bezier(0.16,1,0.3,1)" }}
         >
-          <h2 className="text-5xl md:text-6xl font-black text-[#111] leading-[1.05]">
+          <h2 className="text-4xl md:text-5xl font-black text-[#111] leading-[1.05]">
             온스팟과 함께하는<br />창업 8단계
           </h2>
         </div>
 
         {/* ── 데스크탑: 스네이크 ── */}
-        <div className="hidden md:block" style={{ opacity: inView ? 1 : 0, transition: "all 0.7s ease 0.2s" }}>
+        <div className="hidden md:block" style={{ opacity: inView ? 1 : 0, transition: "all 0.8s cubic-bezier(0.16,1,0.3,1) 0.2s" }}>
           {rows.map((row, ri) => (
             <div key={ri}>
               <div className="grid grid-cols-3 gap-6 items-stretch">
@@ -139,7 +139,7 @@ export default function FranchiseProcess() {
         </div>
 
         {/* CTA */}
-        <div className="mt-16 text-center" style={{ opacity: inView ? 1 : 0, transition: "opacity 0.8s ease 0.6s" }}>
+        <div className="mt-16 text-center" style={{ opacity: inView ? 1 : 0, transform: inView ? "none" : "translateY(40px)", transition: "all 0.85s cubic-bezier(0.16,1,0.3,1) 0.6s" }}>
           <a
             href="/#contact"
             className="inline-block px-10 py-4 bg-[#E41220] text-white font-black rounded-full text-base hover:bg-[#b50e1a] transition-all hover:scale-105 shadow-lg shadow-red-200"

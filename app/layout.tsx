@@ -18,16 +18,10 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // 블랙(다크) 버전으로 최종 확정 — 단일 테마 고정 (data-theme="dark")
   return (
-    <html lang="ko" suppressHydrationWarning>
+    <html lang="ko" data-theme="dark" suppressHydrationWarning>
       <head>
-        {/* 저장된 '블랙' 버전 선택을 첫 페인트 전에 적용 (깜빡임 방지) */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html:
-              "(function(){try{if(localStorage.getItem('onspot-theme')==='dark'){document.documentElement.setAttribute('data-theme','dark');}}catch(e){}})();",
-          }}
-        />
         {/* Pretendard — 가변 단일 파일을 'Pretendard' 로 등록 (globals.css @font-face) */}
         <link rel="preconnect" href="https://cdn.jsdelivr.net" crossOrigin="anonymous" />
         <link
@@ -36,6 +30,17 @@ export default function RootLayout({
           type="font/woff2"
           href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/woff2/PretendardVariable.woff2"
           crossOrigin="anonymous"
+        />
+        {/* G마켓 산스 — 제목 전용. Turbopack CSS 최적화를 피해 헤드 인라인 스타일로 정의 */}
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+@font-face{font-family:'GmarketSans';font-weight:300;font-style:normal;font-display:swap;src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff');}
+@font-face{font-family:'GmarketSans';font-weight:500;font-style:normal;font-display:swap;src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');}
+@font-face{font-family:'GmarketSans';font-weight:700;font-style:normal;font-display:swap;src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');}
+h1,h2,h3,h4{font-family:'GmarketSans','Pretendard',sans-serif;}
+`,
+          }}
         />
       </head>
       <body style={{ fontFamily: "Pretendard, sans-serif" }}>

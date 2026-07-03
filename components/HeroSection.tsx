@@ -54,14 +54,13 @@ export default function HeroSection() {
         <div className="w-full">
           <div style={{ animation: "fadeInUp 0.9s ease 0.4s both" }}>
             <h1
-              className="font-black text-white leading-[1.08] mb-0"
+              className="font-black text-white leading-[1.22] mb-0"
               style={{ fontSize: "clamp(2.4rem, 6.5vw, 5.5rem)" }}
             >
               켜는 순간,<br />
-              우리만의{" "}
-              {/* 포인트 — 네온 사인 */}
-              <span className="neon-text relative inline-block whitespace-nowrap">
-                놀이터
+              {/* 포인트 — 뒤에서 좌→우로 그어지는 하이라이트 스윕 */}
+              <span className="hl-sweep relative inline-block whitespace-nowrap">
+                <span className="relative z-10">우리만의 놀이터</span>
               </span>
             </h1>
           </div>
