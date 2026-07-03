@@ -39,3 +39,18 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+.vercel
+
+# ── GitHub 푸시 제외 (요청/보안) ──
+# 대용량 원본 에셋 — 앱은 public/images/ 리사이즈본만 사용
+/public/온스팟_홈페이지제작용
+/public/온스팟 메뉴 촬영 선정건
+/public/온스팟 브랜드로고
+/public/images/royal.jpg
+
+# md 문서 (요청: 푸시하지 않음)
+*.md
+
+# 로컬 실행 스크립트 (Windows helper, API 키 포함)
+*.bat

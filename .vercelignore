@@ -1,0 +1,8 @@
+# 미사용 원본 에셋 — 앱은 public/images/ 만 참조 (배포 용량 절감)
+public/온스팟 메뉴 촬영 선정건
+public/온스팟 브랜드로고
+public/온스팟_홈페이지제작용
+
+# 빌드 산출물/의존성 (Vercel이 서버에서 빌드)
+.next
+node_modules
