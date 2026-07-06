@@ -127,6 +127,55 @@ body {
   }
 }
 
+/* ── 카드 팝 등장 (탕! 탕! 탕! — 강렬한 순차 등장) ──
+   부모에 pop-seq, 진입 시 is-in → 직계 자식이 작게→오버슈트→제자리로 튀어나옴.
+   (호버 transform 충돌 방지: 자식은 래퍼 div, 실제 카드는 그 안에 둘 것) */
+@keyframes cardPop {
+  0%   { opacity: 0; transform: scale(0.4); }
+  60%  { opacity: 1; transform: scale(1.08); }
+  100% { opacity: 1; transform: scale(1); }
+}
+.pop-seq > * { opacity: 0; will-change: transform, opacity; }
+.pop-seq.is-in > * { animation: cardPop 0.45s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.pop-seq.is-in > *:nth-child(1) { animation-delay: 0.05s; }
+.pop-seq.is-in > *:nth-child(2) { animation-delay: 0.22s; }
+.pop-seq.is-in > *:nth-child(3) { animation-delay: 0.39s; }
+.pop-seq.is-in > *:nth-child(4) { animation-delay: 0.56s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .pop-seq > * { opacity: 1 !important; transform: none !important; animation: none !important; }
+}
+
+/* ── 스크롤 유도 그래픽 — 은은한 세로 라인 + 내려가는 레드 점 ── */
+.scroll-cue {
+  position: relative;
+  width: 1px;
+  height: 56px;
+  background: linear-gradient(to bottom, rgba(228, 18, 32, 0.05), rgba(228, 18, 32, 0.45), rgba(228, 18, 32, 0.03));
+  overflow: hidden;
+}
+.scroll-cue-dot {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 6px;
+  height: 6px;
+  margin-left: -3px;
+  border-radius: 9999px;
+  background: #E41220;
+  box-shadow: 0 0 8px rgba(228, 18, 32, 0.85);
+  animation: scrollCue 1.9s cubic-bezier(0.6, 0, 0.4, 1) infinite;
+}
+@keyframes scrollCue {
+  0%   { transform: translateY(-8px); opacity: 0; }
+  25%  { opacity: 1; }
+  75%  { opacity: 1; }
+  100% { transform: translateY(56px); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-cue-dot { animation: none; }
+}
+
 /* (제목 밑 빨간 선 제거됨) */
 
 .scrollbar-hide::-webkit-scrollbar {
@@ -247,13 +296,29 @@ body {
   z-index: 0;
   transform: scaleX(0);
   transform-origin: left center;
-  animation: hlSweep 0.8s cubic-bezier(0.65, 0, 0.35, 1) 1.35s forwards;
+  animation: hlSweep 0.8s cubic-bezier(0.65, 0, 0.35, 1) 1.9s forwards;
 }
 
 @keyframes hlSweep {
   from { transform: scaleX(0); }
   to   { transform: scaleX(1); }
 }
+
+/* ── 히어로 글자 하나씩 등장 (타이핑 느낌) ── */
+.char-in {
+  display: inline-block;
+  opacity: 0;
+  animation: charIn 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+@keyframes charIn {
+  0%   { opacity: 0; transform: translateY(0.45em); filter: blur(6px); }
+  100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .char-in { animation: none; opacity: 1; }
+}
+
+/* 히어로 타이핑 CSS 재컴파일 보정 */
 
 @media (prefers-reduced-motion: reduce) {
   .hl-sweep::before { animation: none; transform: scaleX(1); }

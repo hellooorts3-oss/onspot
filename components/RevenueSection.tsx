@@ -7,7 +7,7 @@ function useInView(threshold = 0.1) {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) setInView(true); },
-      { threshold }
+      { threshold, rootMargin: "0px 0px -18% 0px" }
     );
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
@@ -36,17 +36,17 @@ function useCountUp(target: number, start: boolean, duration = 1400) {
 
 const fmt = (n: number) => n.toLocaleString("ko-KR");
 
-/* PDF 기획안 4. 확실하게 입증된 압도적인 수익구조 (50평 기준 예시)
-   매출 3,300만원 = 게임 1,800 + 음식료 1,500 / 비용 1,730만원 / 순이익 1,570만원 (47.6%) */
-const TOTAL = 3300;
+/* PDF 기획안 4. 확실하게 입증된 압도적인 수익구조 (65평 기준 예시)
+   매출 5,000만원 = 공간이용료 3,700 + 식음료 1,300 / 비용 1,747만원 / 순이익 3,253만원 (65.1%) */
+const TOTAL = 5000;
 const segments = [
-  { label: "순이익", short: "순이익", value: 1570, color: "#E41220" },
-  { label: "인건비 (풀오토 정직원 2명 기준)", short: "인건비", value: 700, color: "#3f3f3f" },
-  { label: "식자재비", short: "식자재비", value: 450, color: "#5c5c5c" },
-  { label: "임대료", short: "임대료", value: 280, color: "#7a7a7a" },
-  { label: "관리비 및 공과금", short: "관리비·공과금", value: 200, color: "#999999" },
-  { label: "로열티", short: "로열티", value: 50, color: "#b8b8b8" },
-  { label: "카드수수료 / 인터넷 / 기타지출", short: "기타지출", value: 50, color: "#d4d4d4" },
+  { label: "순이익", short: "순이익", value: 3253, color: "#E41220" },
+  { label: "인건비 (풀오토 기준)", short: "인건비", value: 550, color: "#3f3f3f" },
+  { label: "식자재비", short: "식자재비", value: 390, color: "#5c5c5c" },
+  { label: "임대료", short: "임대료", value: 450, color: "#7a7a7a" },
+  { label: "관리비 및 공과금", short: "관리비·공과금", value: 180, color: "#999999" },
+  { label: "로열티", short: "로열티", value: 77, color: "#b8b8b8" },
+  { label: "카드수수료 / 인터넷 / 기타지출", short: "기타지출", value: 100, color: "#d4d4d4" },
 ];
 
 /* ── 도넛 차트 ── active(강조 항목) 상태는 부모가 관리 → 우측 비용 탭과 연동 */
@@ -55,7 +55,7 @@ function DonutChart({ active, setActive, animate }: { active: number | null; set
   const C = 2 * Math.PI * R;
   const fracs = segments.map((s) => s.value / TOTAL);
   const offsets = fracs.map((_, i) => fracs.slice(0, i).reduce((a, b) => a + b, 0));
-  const pct = useCountUp(476, animate) / 10;
+  const pct = useCountUp(651, animate) / 10;
   const cur = active !== null ? segments[active] : null;
 
   return (
@@ -95,7 +95,7 @@ function DonutChart({ active, setActive, animate }: { active: number | null; set
           <>
             <text x="110" y="94" textAnchor="middle" className="fill-[#111]" style={{ fontSize: 14, fontWeight: 700 }}>순이익 마진율</text>
             <text x="110" y="128" textAnchor="middle" className="fill-[#E41220]" style={{ fontSize: 32, fontWeight: 900 }}>{pct.toFixed(1)}%</text>
-            <text x="110" y="149" textAnchor="middle" className="fill-gray-400" style={{ fontSize: 11 }}>(50평 기준)</text>
+            <text x="110" y="149" textAnchor="middle" className="fill-gray-400" style={{ fontSize: 11 }}>(65평 기준)</text>
           </>
         )}
       </svg>
@@ -104,9 +104,9 @@ function DonutChart({ active, setActive, animate }: { active: number | null; set
 }
 
 const directSales = [
-  { region: "경기 A지점", monthly: 77875600 },
-  { region: "경상 B지점", monthly: 114944700, highlight: true },
-  { region: "전라 C지점", monthly: 80850600 },
+  { region: "4월 (수도권 A지점)", monthly: 71231300 },
+  { region: "5월 (수도권 A지점)", monthly: 87441700, highlight: true },
+  { region: "6월 (수도권 A지점)", monthly: 66726700 },
 ];
 const maxSales = Math.max(...directSales.map((s) => s.monthly));
 
@@ -116,28 +116,28 @@ function SalesCard({ s, animate }: { s: (typeof directSales)[number]; animate: b
   const hl = s.highlight;
   return (
     <div
-      className={`relative rounded-3xl p-7 transition-all duration-300 hover:-translate-y-1.5 ${
+      className={`relative rounded-3xl p-7 transition-all duration-300 ${
         hl
-          ? "bg-white shadow-2xl shadow-black/25 md:-translate-y-2"
-          : "bg-white/10 backdrop-blur-sm border border-white/15 hover:bg-white/[0.16]"
+          ? "bg-white ring-2 ring-[#E41220] shadow-[0_30px_75px_-24px_rgba(228,18,32,0.7)] md:-translate-y-3 md:scale-[1.03] z-10 hover:-translate-y-4"
+          : "bg-white/10 backdrop-blur-sm border border-white/15 hover:bg-white/[0.16] hover:-translate-y-1.5"
       }`}
     >
       {hl && (
-        <span className="absolute -top-3.5 left-7 inline-flex items-center gap-1.5 bg-[#111] text-white text-sm font-black rounded-full pl-2.5 pr-3 py-1.5 shadow-lg">
+        <span className="absolute -top-3.5 left-7 inline-flex items-center gap-1.5 bg-[#E41220] text-white text-sm font-black rounded-full pl-2.5 pr-3 py-1.5 shadow-lg shadow-[#E41220]/40">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8L2.2 9l6.9-.7z" />
           </svg>
-          최고 매출 지점
+          최고 매출
         </span>
       )}
 
       {/* 지점명 */}
-      <p className={`font-black text-xl md:text-2xl leading-tight ${hl ? "text-[#111]" : "text-white"}`}>{s.region}</p>
-      <p className={`text-sm mt-1 mb-6 ${hl ? "text-gray-400" : "text-white/50"}`}>실제 월 매출 데이터</p>
+      <p className={`font-black text-xl md:text-2xl leading-tight ${hl ? "text-[#141414]" : "text-white"}`}>{s.region}</p>
+      <p className={`text-sm mt-1 mb-6 ${hl ? "text-[#8a8a8a]" : "text-white/50"}`}>실제 월 매출 데이터</p>
 
       {/* 금액 */}
       <p className={`text-sm font-bold mb-1.5 ${hl ? "text-[#E41220]" : "text-white/60"}`}>월 매출</p>
-      <p className={`font-black tabular-nums leading-none ${hl ? "text-[#E41220]" : "text-white"} text-3xl md:text-[2.1rem]`}>
+      <p className={`font-black tabular-nums leading-none ${hl ? "text-[#E41220] text-4xl md:text-[2.6rem]" : "text-white text-3xl md:text-[2.1rem]"}`}>
         {fmt(v)}
         <span className="text-base font-bold ml-0.5">원</span>
       </p>
@@ -156,17 +156,23 @@ function SalesCard({ s, animate }: { s: (typeof directSales)[number]; animate: b
 export default function RevenueSection() {
   const { ref, inView } = useInView();
   const { ref: salesRef, inView: salesInView } = useInView(0.3);
-  const game = useCountUp(1800, inView);
-  const food = useCountUp(1500, inView);
-  const total = useCountUp(3300, inView);
-  const profit = useCountUp(1570, inView, 1800);
+  const game = useCountUp(3700, inView);
+  const food = useCountUp(1300, inView);
+  const total = useCountUp(5000, inView);
+  const profit = useCountUp(3253, inView, 1800);
   const [active, setActive] = useState<number | null>(null);
 
   return (
     <>
       {/* ── 수익구조 섹션 ── */}
-      <section id="revenue" className="py-28 bg-white overflow-hidden">
-        <div className="max-w-6xl mx-auto px-6">
+      <section id="revenue" className="relative py-28 bg-white overflow-hidden">
+        {/* 하단 은은한 레드 그라데이션 그래픽 */}
+        <div
+          className="absolute inset-x-0 bottom-0 h-72 md:h-96 pointer-events-none"
+          style={{ background: "radial-gradient(ellipse 90% 100% at 50% 100%, rgba(228,18,32,0.16), transparent 72%)" }}
+          aria-hidden="true"
+        />
+        <div className="relative max-w-6xl mx-auto px-6">
 
           <div
             ref={ref}
@@ -174,38 +180,42 @@ export default function RevenueSection() {
             style={{ opacity: inView ? 1 : 0, transform: inView ? "none" : "translateY(46px)", transition: "all 0.85s cubic-bezier(0.16,1,0.3,1)" }}
           >
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-              <h2 className="text-4xl md:text-5xl font-black text-[#111] leading-[1.05]">
-                확실하게 입증된<br />
-                <span className="text-[#E41220]">압도적인 수익구조</span>
-              </h2>
+              <div>
+                <p className="text-[#E41220] text-sm font-black tracking-[0.2em] uppercase mb-4">Revenue Structure</p>
+                <h2 className="text-4xl md:text-5xl font-black text-[#111] leading-[1.05]">
+                  확실하게 입증된<br />
+                  <span className="text-[#E41220]">압도적인 수익구조</span>
+                </h2>
+              </div>
               <p className="text-gray-400 text-lg max-w-xs">
                 직영점 운영 데이터 기반<br />
-                <strong className="text-[#111]">50평 기준 월 수익 예시</strong>
+                <strong className="text-[#111]">65평 기준 월 수익 예시</strong>
               </p>
             </div>
           </div>
 
           {/* 핵심 포인트 2가지 */}
-          <div
-            className="grid md:grid-cols-2 gap-4 mb-16"
-            style={{ opacity: inView ? 1 : 0, transition: "all 0.85s cubic-bezier(0.16,1,0.3,1) 0.15s" }}
-          >
-            <div className="bg-[#f7f7f7] rounded-3xl p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
-              <p className="text-[#E41220] text-sm font-bold mb-2">POINT 01</p>
-              <h3 className="font-black text-[#111] text-lg md:text-xl mb-2">식자재비가 들지 않는 룸 이용료</h3>
-              <p className="text-gray-500 text-lg leading-relaxed">원가 부담 없는 룸 이용료 매출 중심 구조로 압도적인 영업이익률을 실현합니다.</p>
+          <div className="grid md:grid-cols-2 gap-4 mb-16">
+            <div style={{ opacity: inView ? 1 : 0, transform: inView ? "none" : "translateY(40px)", transition: "all 0.7s cubic-bezier(0.16,1,0.3,1) 0.15s" }}>
+              <div className="bg-[#f7f7f7] rounded-3xl p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+                <p className="text-[#E41220] text-sm font-bold mb-2">POINT 01</p>
+                <h3 className="font-black text-[#111] text-lg md:text-xl mb-2">식자재비가 들지 않는 좌석 이용료</h3>
+                <p className="text-gray-500 text-lg leading-relaxed">원가 부담 없는 좌석 이용료 매출 중심 구조로 압도적인 영업이익률을 실현합니다.</p>
+              </div>
             </div>
-            <div className="bg-[#f7f7f7] rounded-3xl p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
-              <p className="text-[#E41220] text-sm font-bold mb-2">POINT 02</p>
-              <h3 className="font-black text-[#111] text-lg md:text-xl mb-2">차별화된 F&B 시스템</h3>
-              <p className="text-gray-500 text-lg leading-relaxed">F&B 추가 매출 증대와 고객 체류시간 증가를 동시에 만들어냅니다.</p>
+            <div style={{ opacity: inView ? 1 : 0, transform: inView ? "none" : "translateY(40px)", transition: "all 0.7s cubic-bezier(0.16,1,0.3,1) 0.28s" }}>
+              <div className="bg-[#f7f7f7] rounded-3xl p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+                <p className="text-[#E41220] text-sm font-bold mb-2">POINT 02</p>
+                <h3 className="font-black text-[#111] text-lg md:text-xl mb-2">차별화된 F&B 시스템</h3>
+                <p className="text-gray-500 text-lg leading-relaxed">F&B 추가 매출 증대와 고객 체류시간 증가를 동시에 만들어냅니다.</p>
+              </div>
             </div>
           </div>
 
           {/* 왼쪽: 도넛 + 매출 3종(한 줄) / 오른쪽: 비용 탭 + 예상 수익 */}
           <div
             className="grid md:grid-cols-2 gap-12 md:gap-20 items-start"
-            style={{ opacity: inView ? 1 : 0, transition: "all 0.85s cubic-bezier(0.16,1,0.3,1) 0.25s" }}
+            style={{ opacity: inView ? 1 : 0, transform: inView ? "none" : "translateY(40px)", transition: "all 0.85s cubic-bezier(0.16,1,0.3,1) 0.25s" }}
           >
             {/* ── 왼쪽 ── */}
             <div>
@@ -214,9 +224,9 @@ export default function RevenueSection() {
               {/* 매출 3종 — 원형 밑, 한 줄 */}
               <div className="grid grid-cols-3 gap-3 mt-12 pt-8 border-t border-gray-100">
                 {[
-                  { v: game, label: "게임 이용 매출", hot: false },
-                  { v: food, label: "음식료 매출", hot: false },
-                  { v: total, label: "총 매출", hot: true },
+                  { v: game, label: "공간 이용료 매출", hot: false },
+                  { v: food, label: "식음료 매출", hot: false },
+                  { v: total, label: "총 매출 (VAT 포함)", hot: true },
                 ].map((item, i) => (
                   <div key={i} className="text-center">
                     <div
@@ -280,33 +290,25 @@ export default function RevenueSection() {
 
               {/* 총 비용 */}
               <div className="flex items-center justify-between px-5 mt-4 pt-4 border-t-2 border-gray-200">
-                <span className="text-[#111] font-black text-base">총 비용</span>
+                <span className="text-[#111] font-black text-base">총 비용 <span className="text-gray-400 text-xs font-bold">(VAT 포함)</span></span>
                 <span className="text-[#111] font-black text-xl tabular-nums">
-                  1,730<span className="text-sm font-bold ml-0.5">만원</span>
+                  1,747<span className="text-sm font-bold ml-0.5">만원</span>
                 </span>
               </div>
 
-              {/* 예상 월 평균 수익 — 붓 밑줄 강조 (오른쪽 끝 정렬) */}
-              <div className="mt-12 text-right">
-                <div className="flex flex-col md:flex-row items-end justify-end gap-1 md:gap-4">
-                  <span className="text-gray-500 text-lg md:text-xl font-bold whitespace-nowrap md:pb-3">
-                    예상 월 평균 수익
-                  </span>
-                  <p className="font-black text-[#E41220] leading-none relative inline-block" style={{ textShadow: "0 6px 18px rgba(228,18,32,0.22)" }}>
-                    <span className="relative z-10 tabular-nums" style={{ fontSize: "clamp(3.4rem, 7vw, 5.5rem)" }}>
-                      {fmt(profit)}
-                      <span className="text-2xl md:text-4xl ml-1.5">만원</span>
-                    </span>
-                    {/* 클린 언더라인 바 — 형광펜 대신 또렷한 포인트 */}
-                    <span
-                      className="absolute left-0 -bottom-2 h-[7px] rounded-full bg-[#E41220] z-0"
-                      style={{ width: inView ? "100%" : "0%", transition: "width 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.5s" }}
-                      aria-hidden="true"
-                    />
+              {/* 예상 월 평균 수익 — 프리미엄 강조 카드 (오른쪽 정렬) */}
+              <div className="mt-12 flex flex-col items-stretch md:items-end">
+                <div className="relative overflow-hidden rounded-[1.75rem] border border-[#E41220]/30 bg-gradient-to-br from-[#E41220]/[0.1] to-[#E41220]/[0.02] px-8 py-7 md:px-11 md:py-8 shadow-[0_24px_70px_-28px_rgba(228,18,32,0.6)]">
+                  {/* 상단 미세 하이라이트 라인 */}
+                  <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#E41220] to-transparent opacity-60" aria-hidden="true" />
+                  <p className="text-[#E41220] text-sm font-black tracking-[0.2em] uppercase mb-2 text-right">예상 월 평균 수익</p>
+                  <p className="font-black leading-none tabular-nums text-right">
+                    <span className="text-[#E41220]" style={{ fontSize: "clamp(3.2rem, 7vw, 5.4rem)" }}>{fmt(profit)}</span>
+                    <span className="text-2xl md:text-3xl font-bold ml-1.5 text-white/70">만원</span>
                   </p>
                 </div>
-                <p className="text-gray-400 text-sm mt-6">
-                  * 50평 기준 예시이며, 지점별 상황에 따라 상이할 수 있습니다.
+                <p className="text-gray-400 text-sm mt-5 text-right">
+                  * 65평 기준 예시이며, 지점별 상황에 따라 상이할 수 있습니다.
                 </p>
               </div>
             </div>
@@ -316,24 +318,27 @@ export default function RevenueSection() {
       </section>
 
       {/* ── 직영점 실매출 — 풀 블리드 레드 (디자인 리뉴얼) ── */}
-      <section className="relative py-24 bg-[#0a0a0a] overflow-hidden">
-        {/* 배경 성장차트 이미지 — 불투명도 70%, 고정(fixed) */}
+      <section className="relative py-24 bg-[#E41220] overflow-hidden">
+        {/* 배경 성장차트 이미지 — 레드 위에 은은하게 */}
         <div
           className="absolute inset-0 bg-cover bg-center pointer-events-none"
-          style={{ backgroundImage: "url(/images/plus.jpg)", opacity: 0.7, backgroundAttachment: "fixed" }}
+          style={{ backgroundImage: "url(/images/plus.jpg)", opacity: 0.12 }}
         />
-        {/* 깊이감용 라이트/다크 라디얼 */}
+        {/* 깊이감용 라이팅 라디얼 */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              "radial-gradient(ellipse 80% 60% at 50% -10%, rgba(255,255,255,0.10), transparent 60%), radial-gradient(ellipse 90% 70% at 50% 120%, rgba(0,0,0,0.25), transparent 55%)",
+              "radial-gradient(ellipse 80% 60% at 50% -10%, rgba(255,255,255,0.14), transparent 60%), radial-gradient(ellipse 90% 70% at 50% 120%, rgba(0,0,0,0.28), transparent 55%)",
           }}
         />
         <div className="relative max-w-6xl mx-auto px-6" ref={salesRef}>
 
           {/* 헤더 + 평균 요약 */}
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-7 mb-14">
+          <div
+            className="flex flex-col md:flex-row md:items-end md:justify-between gap-7 mb-14"
+            style={{ opacity: salesInView ? 1 : 0, transform: salesInView ? "none" : "translateY(46px)", transition: "all 0.8s cubic-bezier(0.16,1,0.3,1)" }}
+          >
             <div>
               <p className="inline-flex items-center gap-2 text-white/70 text-sm font-bold tracking-[0.2em] uppercase mb-4">
                 <span className="w-6 h-px bg-white/40" />
@@ -347,18 +352,24 @@ export default function RevenueSection() {
                 검증된 모델로 가맹점의 성공 가능성을 높입니다.
               </p>
             </div>
-            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl px-6 py-4 self-start">
-              <p className="text-white/60 text-sm mb-1.5">3개 직영점 평균 월매출</p>
-              <p className="text-white font-black text-3xl tabular-nums leading-none">
-                약 9,100<span className="text-base font-bold ml-1">만원</span>
+            <div className="relative overflow-hidden rounded-2xl border border-white/30 bg-white/15 backdrop-blur-md px-7 py-5 self-start shadow-[0_18px_50px_-18px_rgba(0,0,0,0.4)]">
+              <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white to-transparent opacity-60" aria-hidden="true" />
+              <p className="text-white/80 text-xs font-black tracking-[0.15em] uppercase mb-1.5">월 평균 매출</p>
+              <p className="text-white font-black text-3xl md:text-4xl tabular-nums leading-none">
+                약 7,513<span className="text-base font-bold ml-1 text-white/70">만원</span>
               </p>
             </div>
           </div>
 
-          {/* 지점 카드 */}
+          {/* 지점 카드 — 순차 등장 */}
           <div className="grid md:grid-cols-3 gap-5 items-stretch pt-2">
             {directSales.map((s, i) => (
-              <SalesCard key={i} s={s} animate={salesInView} />
+              <div
+                key={i}
+                style={{ opacity: salesInView ? 1 : 0, transform: salesInView ? "none" : "translateY(46px)", transition: `all 0.7s cubic-bezier(0.16,1,0.3,1) ${(0.15 + i * 0.14).toFixed(2)}s` }}
+              >
+                <SalesCard s={s} animate={salesInView} />
+              </div>
             ))}
           </div>
 

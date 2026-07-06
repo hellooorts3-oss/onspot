@@ -8,7 +8,7 @@ export default function FloatingButtons() {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
   return (
-    <div className="fixed bottom-6 right-5 z-50 flex flex-col items-center gap-2">
+    <div className="fixed bottom-24 right-5 z-50 flex flex-col items-center gap-2">
       {/* Expandable buttons */}
       {open && (
         <div className="flex flex-col items-center gap-2 mb-1" style={{ animation: "fadeInUp 0.3s ease" }}>
@@ -51,13 +51,15 @@ export default function FloatingButtons() {
         )}
       </button>
 
-      {/* Scroll to top */}
+      {/* Scroll to top — TOP 버튼 */}
       <button
         onClick={scrollToTop}
-        className="w-10 h-10 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full flex items-center justify-center text-white/70 hover:bg-white/20 transition-all"
+        aria-label="맨 위로"
         title="맨 위로"
+        className="w-14 h-14 bg-[#111] rounded-full flex flex-col items-center justify-center text-white shadow-xl hover:bg-black hover:-translate-y-0.5 transition-all"
       >
-        <ChevronUp size={18} />
+        <ChevronUp size={20} strokeWidth={2.5} />
+        <span className="text-[10px] font-black tracking-wide -mt-0.5">TOP</span>
       </button>
     </div>
   );

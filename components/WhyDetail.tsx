@@ -7,7 +7,7 @@ function useInView(threshold = 0.1) {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) setInView(true); },
-      { threshold }
+      { threshold, rootMargin: "0px 0px -18% 0px" }
     );
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
@@ -60,7 +60,7 @@ export default function WhyDetail() {
         {/* ── 1) 매장 직원 서비스 ── */}
         <div
           className="grid md:grid-cols-2 gap-10 items-center mb-24"
-          style={{ opacity: inView ? 1 : 0, transition: "all 0.85s cubic-bezier(0.16,1,0.3,1) 0.15s" }}
+          style={{ opacity: inView ? 1 : 0, transform: inView ? "none" : "translateY(40px)", transition: "all 0.85s cubic-bezier(0.16,1,0.3,1) 0.15s" }}
         >
           <div>
             <p className="text-[#E41220] text-sm font-bold mb-3">DETAIL 01</p>
@@ -68,21 +68,33 @@ export default function WhyDetail() {
               매장 직원 서비스
             </h3>
             <p className="text-gray-500 leading-[1.9] text-lg mb-4">
-              24시 무인 매장은 청결·응대·보안 등 <strong className="text-[#111]">관리가 어렵습니다.</strong>
+              청결, 응대, 보안 면에서 24시간 무인 운영은 불가능에 가깝습니다.
             </p>
             <p className="text-gray-500 leading-[1.9] text-lg">
-              온스팟은 고객 안내와 기본 응대 중심의 <strong className="text-[#111]">직원을 배치</strong>하여
+              온스팟은 기본 응대 중심으로 직원 배치 및 교육 시스템을 구축하여
               운영 안정성과 서비스 품질을 모두 높였습니다.
               처음 방문한 고객도 어렵지 않게 즐길 수 있는 이유입니다.
             </p>
           </div>
-          <Photo src="/images/feat/feat-5.jpg" label="직원 고객 응대" ratio="4/3" rounded="rounded-3xl" />
+          <div className="relative">
+            <Photo src="/images/feat/feat-5.jpg" label="직원 고객 응대" ratio="4/3" rounded="rounded-3xl" />
+            {/* 임시 이미지 안내 배지 */}
+            <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 bg-[#E41220] text-white text-xs font-black rounded-full px-3 py-1.5 shadow-lg">
+              임시 이미지
+            </span>
+            {/* 하단 안내 문구 */}
+            <div className="absolute inset-x-3 bottom-3 rounded-xl bg-black/70 backdrop-blur-sm px-4 py-2.5">
+              <p className="text-white/90 text-sm font-medium leading-snug text-center">
+                직원 모자 착용 사진 전달 주시면 정식 등록 예정입니다
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* ── 2) QR 주문 및 조리 시스템 — 핸드폰 프레임 스크롤링 ── */}
         <div
           className="grid md:grid-cols-2 gap-10 items-center mb-16"
-          style={{ opacity: inView ? 1 : 0, transition: "all 0.85s cubic-bezier(0.16,1,0.3,1) 0.3s" }}
+          style={{ opacity: inView ? 1 : 0, transform: inView ? "none" : "translateY(40px)", transition: "all 0.85s cubic-bezier(0.16,1,0.3,1) 0.3s" }}
         >
           {/* 핸드폰 프레임 */}
           <div className="flex justify-center order-2 md:order-1">
@@ -109,23 +121,23 @@ export default function WhyDetail() {
               QR 주문 및 조리 시스템
             </h3>
             <p className="text-gray-500 leading-[1.9] text-lg mb-4">
-              동종 업계에서 보기 어려운 <strong className="text-[#111]">QR 주문과 즉시 조리 시스템</strong>을 운영합니다.
+              온스팟은 좌석에 앉아 QR 주문으로 음식을 주문하는 시스템을 운영합니다.
             </p>
             <p className="text-gray-500 leading-[1.9] text-lg">
-              룸에서 나가지 않고 QR로 주문하면 즉시 조리가 시작됩니다.
-              주문 편의성과 F&B 만족도를 모두 확보한 온스팟만의 차별점입니다.
+              무인편의점 방식 대비 주문 편의성, 메뉴의 다양성 모두 월등하여
+              F&B 매출 증대 및 고객 체류 시간 증가라는 두 마리 토끼를 잡을 수 있었습니다.
             </p>
           </div>
         </div>
 
         {/* ── 조리메뉴 갤러리 ── */}
-        <div style={{ opacity: inView ? 1 : 0, transition: "all 0.85s cubic-bezier(0.16,1,0.3,1) 0.4s" }}>
+        <div style={{ opacity: inView ? 1 : 0, transform: inView ? "none" : "translateY(40px)", transition: "all 0.85s cubic-bezier(0.16,1,0.3,1) 0.4s" }}>
           <div className="text-center mb-8">
             <p className="text-[#E41220] text-sm font-bold uppercase tracking-widest mb-2">ONSPOT MENU</p>
             <h3 className="text-2xl md:text-3xl font-black text-[#111]">직원이 직접 조리하는 메뉴</h3>
             <p className="text-gray-400 text-base mt-2">갓 조리한 분식부터 든든한 덮밥, 카페 음료까지</p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+          <div className={`grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 anim-seq ${inView ? "is-in" : ""}`}>
             {cookedMenuPhotos.map((m, i) => (
               <div key={i} className="group relative rounded-2xl overflow-hidden aspect-[4/5] shadow-sm bg-gray-100">
                 <div
@@ -148,6 +160,11 @@ export default function WhyDetail() {
             ))}
           </div>
           <p className="text-gray-400 text-sm text-center mt-6">* 스낵바 외 다양한 직원 조리 메뉴를 제공합니다</p>
+          <div className="mt-4 flex justify-center">
+            <span className="inline-flex items-center gap-1.5 bg-[#E41220]/10 text-[#E41220] text-sm font-bold rounded-full px-4 py-1.5">
+              ※ 사진들 교체 예정 (신규 촬영 사진으로)
+            </span>
+          </div>
         </div>
 
       </div>

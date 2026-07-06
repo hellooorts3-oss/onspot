@@ -21,7 +21,7 @@ function useInView(threshold = 0.1) {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) setInView(true); },
-      { threshold }
+      { threshold, rootMargin: "0px 0px -18% 0px" }
     );
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
@@ -44,8 +44,14 @@ function StepCard({ s, inView }: { s: Step; inView: boolean }) {
         <span className="inline-flex items-center justify-center h-7 px-3 rounded-full bg-[#E41220] text-white text-sm font-black tracking-wide">
           STEP {s.step}
         </span>
+        {/* 8단계 아이콘 — 세로 높이 통일 */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={s.icon} alt="" className="w-14 h-14 object-contain" />
+        <img
+          src={`/images/00.new/8_icon/${parseInt(s.step, 10)}.png`}
+          alt=""
+          aria-hidden="true"
+          className="h-12 w-auto object-contain shrink-0"
+        />
       </div>
       <h3 className="font-black text-[#111] text-base md:text-lg mb-1.5 leading-snug">{s.title}</h3>
       <p className="text-gray-400 text-base leading-relaxed">{s.desc}</p>

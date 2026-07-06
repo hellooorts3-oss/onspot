@@ -7,7 +7,7 @@ function useInView(threshold = 0.1) {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) setInView(true); },
-      { threshold }
+      { threshold, rootMargin: "0px 0px -18% 0px" }
     );
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
@@ -26,8 +26,14 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-24 bg-[#0a0a0a]">
-      <div className="max-w-6xl mx-auto px-6">
+    <section id="contact" className="relative py-24 bg-[#0a0a0a] overflow-hidden">
+      {/* 고정 배경 이미지(6번) — 스크롤해도 고정, 은은하게 */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-fixed opacity-[0.15] pointer-events-none"
+        style={{ backgroundImage: "url(/images/00.new/06.jpg)" }}
+        aria-hidden="true"
+      />
+      <div className="relative max-w-6xl mx-auto px-6">
         <div
           ref={ref}
           className="grid md:grid-cols-2 gap-16"
@@ -38,7 +44,7 @@ export default function ContactSection() {
           }}
         >
           {/* Left */}
-          <div>
+          <div className={`anim-seq ${inView ? "is-in" : ""}`}>
             <h2 className="text-4xl md:text-5xl font-black text-white leading-tight mb-6">
               지금 바로
               <br />
@@ -53,8 +59,10 @@ export default function ContactSection() {
             <div className="space-y-4">
               {/* PDF: 전화상담 대표번호 0000-0000 (미정) — 확정 시 교체 */}
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-[#E41220] rounded-xl flex items-center justify-center text-white text-base">
-                  📞
+                <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                  </svg>
                 </div>
                 <div>
                   <div className="text-white/40 text-sm">전화 상담 (모바일에서만 작동)</div>
@@ -63,8 +71,10 @@ export default function ContactSection() {
               </div>
               {/* PDF: 카카오톡 채널 링크 전달 예정 — 확정 시 교체 */}
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-[#E41220] rounded-xl flex items-center justify-center text-white text-base">
-                  💬
+                <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+                  </svg>
                 </div>
                 <div>
                   <div className="text-white/40 text-sm">카카오톡 채널 (링크 추가 예정)</div>
@@ -72,17 +82,24 @@ export default function ContactSection() {
                 </div>
               </div>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-[#E41220] rounded-xl flex items-center justify-center text-white text-base">
-                  📧
+                <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <rect x="2" y="4" width="20" height="16" rx="2" />
+                    <path d="m22 7-10 5L2 7" />
+                  </svg>
                 </div>
                 <div>
                   <div className="text-white/40 text-sm">이메일</div>
-                  <div className="text-white font-bold">holicmst@the-holic.kr</div>
+                  <div className="text-white font-bold">theholic1024@naver.com</div>
                 </div>
               </div>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center text-white text-base">
-                  📸
+                <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <rect x="2" y="2" width="20" height="20" rx="5" />
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                  </svg>
                 </div>
                 <div>
                   <div className="text-white/40 text-sm">인스타그램</div>
@@ -103,7 +120,11 @@ export default function ContactSection() {
           <div>
             {submitted ? (
               <div className="bg-white/5 rounded-2xl p-8 text-center h-full flex flex-col items-center justify-center">
-                <div className="text-5xl mb-4">✅</div>
+                <div className="w-16 h-16 rounded-full border-2 border-[#E41220] flex items-center justify-center mb-4" aria-hidden="true">
+                  <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#E41220" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M20 6 9 17l-5-5" />
+                  </svg>
+                </div>
                 <h3 className="text-white font-black text-xl mb-2">문의가 접수되었습니다!</h3>
                 <p className="text-white/60 text-sm">
                   담당 매니저가 빠른 시일 내에 연락드리겠습니다.

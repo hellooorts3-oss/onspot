@@ -7,7 +7,7 @@ function useInView(threshold = 0.1) {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) setInView(true); },
-      { threshold }
+      { threshold, rootMargin: "0px 0px -18% 0px" }
     );
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
@@ -44,7 +44,6 @@ const interiorSlides = [
   { label: "닌텐도 게임 룸", img: "/images/space/space-4.jpg" },
   { label: "PS5 게임 룸", img: "/images/space/space-5.jpg" },
   { label: "만화책 공간", img: "/images/space/space-6.jpg" },
-  { label: "보드게임 공간", img: "/images/space/space-7.jpg" },
   { label: "내부 복도", img: "/images/space/space-8.jpg" },
 ];
 
@@ -90,7 +89,10 @@ export default function SpaceDesign() {
 
       {/* 스낵바 — 인테리어와 동일한 슬라이더 (반대 방향) */}
       <div className="max-w-6xl mx-auto px-6">
-        <p className="text-center text-gray-400 text-sm font-bold uppercase tracking-widest mb-6">
+        <p
+          className="text-center text-gray-400 text-sm font-bold uppercase tracking-widest mb-6"
+          style={{ opacity: inView ? 1 : 0, transform: inView ? "none" : "translateY(20px)", transition: "all 0.7s cubic-bezier(0.16,1,0.3,1) 0.35s" }}
+        >
           온스팟 24시 스낵바
         </p>
       </div>

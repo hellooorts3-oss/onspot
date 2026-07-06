@@ -8,7 +8,7 @@ function useInView(threshold = 0.1) {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) setInView(true); },
-      { threshold }
+      { threshold, rootMargin: "0px 0px -18% 0px" }
     );
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
@@ -61,7 +61,7 @@ export default function StoreLocator() {
 
         <div
           className="grid md:grid-cols-[320px_1fr] gap-0 rounded-3xl overflow-hidden shadow-sm bg-white"
-          style={{ opacity: inView ? 1 : 0, transition: "all 0.85s cubic-bezier(0.16,1,0.3,1) 0.2s" }}
+          style={{ opacity: inView ? 1 : 0, transform: inView ? "none" : "translateY(40px)", transition: "all 0.85s cubic-bezier(0.16,1,0.3,1) 0.2s" }}
         >
           {/* ── 좌측: 검색 + 지점 리스트 ── */}
           <div className="border-r border-gray-100 flex flex-col">

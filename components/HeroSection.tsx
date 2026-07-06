@@ -1,6 +1,19 @@
 "use client";
 import { useEffect, useState } from "react";
 
+/* 글자를 하나씩 순차 등장시킨다 (base 초부터 char당 step 초 간격) */
+function CharReveal({ text, base, step = 0.07 }: { text: string; base: number; step?: number }) {
+  return (
+    <>
+      {Array.from(text.replace(/ /g, " ")).map((ch, i) => (
+        <span key={i} className="char-in" style={{ animationDelay: `${(base + i * step).toFixed(2)}s`, whiteSpace: "pre" }}>
+          {ch === " " ? " " : ch}
+        </span>
+      ))}
+    </>
+  );
+}
+
 export default function HeroSection() {
   const [scrollY, setScrollY] = useState(0);
 
@@ -50,17 +63,19 @@ export default function HeroSection() {
       {/* ── 콘텐츠 ── */}
       <div className="relative z-10 pt-28 pb-24 px-6 min-h-screen flex flex-col justify-center max-w-7xl mx-auto">
 
-        {/* ── 메인 카피 ── */}
+        {/* ── 메인 카피 — 글자 하나씩 등장 후, 마지막에 형광펜 하이라이트 ── */}
         <div className="w-full">
-          <div style={{ animation: "fadeInUp 0.9s ease 0.4s both" }}>
+          <div>
             <h1
               className="font-black text-white leading-[1.22] mb-0"
               style={{ fontSize: "clamp(2.4rem, 6.5vw, 5.5rem)" }}
             >
-              켜는 순간,<br />
-              {/* 포인트 — 뒤에서 좌→우로 그어지는 하이라이트 스윕 */}
+              <CharReveal text="켜는 순간," base={0.4} /><br />
+              {/* 포인트 — 글자 등장 완료 후 뒤에서 좌→우로 그어지는 하이라이트 스윕 */}
               <span className="hl-sweep relative inline-block whitespace-nowrap">
-                <span className="relative z-10">우리만의 놀이터</span>
+                <span className="relative z-10">
+                  <CharReveal text="우리만의 놀이터" base={0.82} />
+                </span>
               </span>
             </h1>
           </div>

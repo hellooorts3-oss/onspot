@@ -7,7 +7,7 @@ function useInView(threshold = 0.1) {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) setInView(true); },
-      { threshold }
+      { threshold, rootMargin: "0px 0px -18% 0px" }
     );
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
@@ -17,22 +17,22 @@ function useInView(threshold = 0.1) {
 
 /* PDF 기획안 4. Why ONSPOT? — 온스팟 강점 */
 const strengths = [
-  { no: "01", title: "차별화된 F&B 시스템", hl: "F&B 시스템", desc: "보드게임카페에서 축적된 경험을 바탕으로 준비한 F&B 시스템은, 고객 체류시간을 늘리고 추가 매출을 확보합니다." },
-  { no: "02", title: "업계 최저 창업비용", hl: "최저 창업비용", desc: "개인창업보다 저렴하다! 반드시 타 브랜드와 ‘총 창업비용’을 비교해 보세요. ‘가맹비 면제’와 같은 조삼모사에 흔들리지 마세요." },
-  { no: "03", title: "트렌디한 인테리어", hl: "트렌디한", desc: "아늑하고 트렌디한 디자인과 섬세한 공간 구성으로, 이용 고객분들에게 감동을 선사합니다." },
-  { no: "04", title: "다수 직영매장 운영", hl: "직영매장", desc: "전체 매장 중 다수가 본사 직영매장으로, 그 누구보다 본사가 브랜드의 성공을 위해 절박한 각오로 운영합니다." },
+  { no: "01", title: "차별화된 F&B 시스템", hl: "F&B 시스템", img: "/images/00.new/01.png", desc: "보드게임카페에서 축적된 경험을 바탕으로 준비한 F&B 시스템은, 고객 체류시간을 늘리고 추가 매출을 확보합니다." },
+  { no: "02", title: "업계 최저 창업비용", hl: "최저 창업비용", img: "/images/00.new/02.png", desc: "개인창업보다 저렴하다! 반드시 타 브랜드와 ‘총 창업비용’을 비교해 보세요. ‘가맹비 면제’와 같은 조삼모사에 흔들리지 마세요." },
+  { no: "03", title: "트렌디한 인테리어", hl: "트렌디한", img: "/images/00.new/03.png", desc: "아늑하고 트렌디한 디자인과 섬세한 공간 구성으로, 이용 고객분들에게 감동을 선사합니다." },
+  { no: "04", title: "다수 직영매장 운영", hl: "직영매장", img: "/images/00.new/04.png", desc: "전체 매장 중 다수가 본사 직영매장으로, 그 누구보다 본사가 브랜드의 성공을 위해 절박한 각오로 운영합니다." },
 ];
 
 /* 온스팟 포인트 8종 — 큰 이미지 + 우측 탭(클릭/호버 시 이미지 전환)
    ※ feat-1~8.jpg = 실제 매장 사진 (노원점·부평·수원역, 4:3 크롭) */
 const features = [
-  { title: "아늑한 인테리어", desc: "휴식 공간(리클라이너 소파)으로\n친구·커플·가족 이용에 최적화된 프라이빗 룸", img: "/images/feat/feat-1.jpg" },
-  { title: "초고화질 빔프로젝터", desc: "집에서는 느낄 수 없는\n몰입감 높은 초고화질 시청 환경", img: "/images/feat/feat-2.jpg" },
-  { title: "다양한 멀티콘텐츠", desc: "OTT·만화책, 닌텐도 스위치2·PS5 등\n다양한 여가 활동을 한 곳에서", img: "/images/feat/feat-3.jpg" },
-  { title: "F&B 결합형 매장", desc: "직원 조리 메뉴와 다양한 간식·음료를\n스마트 주문 시스템으로 제공", img: "/images/feat/feat-4.jpg" },
-  { title: "매장 직원 서비스", desc: "고객 안내·기본 응대 중심의 직원 배치로\n운영 안정성과 서비스 품질 향상", img: "/images/feat/feat-5.jpg" },
-  { title: "무인 셀프 시스템", desc: "셀프 주문·이용 프로세스로\n대기시간 최소화 및 고객 편의성 향상", img: "/images/feat/feat-6.jpg" },
-  { title: "QR 주문, 조리 시스템", desc: "동종 업계에서 보기 어려운\nQR 주문과 즉시 조리 시스템", img: "/images/feat/feat-7.jpg" },
+  { title: "아늑한 인테리어", desc: "휴식 공간(리클라이너 소파)으로 친구·커플·가족 이용에 최적화된 프라이빗 룸", img: "/images/feat/feat-1.jpg" },
+  { title: "초고화질 빔프로젝터", desc: "집에서는 느낄 수 없는 몰입감 높은 초고화질 시청 환경", img: "/images/feat/feat-2.jpg" },
+  { title: "다양한 멀티콘텐츠", desc: "OTT·만화책, 닌텐도 스위치2·PS5 등 다양한 여가 활동을 한 곳에서", img: "/images/feat/feat-3.jpg" },
+  { title: "F&B 결합형 매장", desc: "직원 조리 메뉴와 다양한 간식·음료를 스마트 주문 시스템으로 제공", img: "/images/feat/feat-4.jpg" },
+  { title: "매장 직원 서비스", desc: "고객 안내·기본 응대 중심의 직원 배치로 운영 안정성과 서비스 품질 향상", img: "/images/feat/feat-5.jpg" },
+  { title: "무인 셀프 시스템", desc: "셀프 주문·이용 프로세스로 대기시간 최소화 및 고객 편의성 향상", img: "/images/feat/feat-6.jpg" },
+  { title: "QR 주문, 조리 시스템", desc: "동종 업계에서 보기 어려운 QR 주문과 즉시 조리 시스템", img: "/images/feat/feat-7.jpg" },
 ];
 
 function WhyOnspotSection() {
@@ -125,10 +125,10 @@ function WhyOnspotSection() {
                         : "bg-white/10 border-white/25 backdrop-blur-sm hover:bg-white/[0.18]"
                     }`}
                   >
-                    <span className={`font-black text-base md:text-lg tabular-nums transition-colors ${on ? "text-[#E41220]" : "text-white/60"}`}>
+                    <span className={`font-bold text-base md:text-lg tabular-nums transition-colors ${on ? "text-[#E41220]" : "text-white/60"}`}>
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <span className={`font-black text-lg md:text-xl transition-colors ${on ? "text-[#141414]" : "text-white"}`}>
+                    <span className={`font-semibold text-lg md:text-xl transition-colors ${on ? "text-[#141414]" : "text-white"}`}>
                       {f.title}
                     </span>
                   </button>
@@ -190,24 +190,13 @@ function StrengthBanners() {
 
             <div className="relative grid grid-cols-1 md:grid-cols-2 items-stretch min-h-[210px] md:min-h-[250px]">
               {/* 이미지 side (준비중) */}
-              <div className={`relative min-h-[170px] md:min-h-full overflow-hidden ${reverse ? "md:order-2" : "md:order-1"}`}>
-                {/* 이미지 준비되면 이 박스 배경으로 교체 */}
-                <div className="absolute inset-0 bg-[#1b110f] flex flex-col items-center justify-center gap-2">
-                  <svg width="42" height="42" viewBox="0 0 24 24" fill="none" className="text-white/15" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
-                    <rect x="3" y="3" width="18" height="18" rx="2.5" />
-                    <circle cx="8.5" cy="8.5" r="1.6" />
-                    <path d="M21 15l-5-5L5 21" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                  <span className="text-white/25 text-sm font-bold tracking-widest uppercase">이미지 준비중</span>
-                </div>
-                {/* 그라데이션 경계 — 이미지가 카드 배경으로 스며듦 */}
+              <div className={`relative min-h-[210px] md:min-h-full overflow-hidden ${reverse ? "md:order-2" : "md:order-1"}`}>
+                {/* 실제 이미지 */}
                 <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background: reverse
-                      ? "linear-gradient(to left, #120b0a 2%, rgba(18,11,10,0.25) 40%, transparent 78%)"
-                      : "linear-gradient(to right, #120b0a 2%, rgba(18,11,10,0.25) 40%, transparent 78%)",
-                  }}
+                  className="absolute inset-0 bg-cover bg-center"
+                  style={{ backgroundImage: `url(${s.img})` }}
+                  role="img"
+                  aria-label={s.title}
                 />
               </div>
 

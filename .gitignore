@@ -54,3 +54,7 @@ next-env.d.ts
 
 # 로컬 실행 스크립트 (Windows helper, API 키 포함)
 *.bat
+
+# 디자인 소스/중복 이미지 (사이트 미사용)
+public/images/00.new/*.psd
+public/images/00.new/*복사*

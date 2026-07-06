@@ -18,7 +18,7 @@ function useInView(threshold = 0.1) {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) setInView(true); },
-      { threshold }
+      { threshold, rootMargin: "0px 0px -18% 0px" }
     );
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
@@ -34,7 +34,7 @@ export default function FranchiseCost() {
       {/* 시네마 무드 배경 — 살짝만 */}
       <div
         className="absolute inset-0 bg-cover bg-center pointer-events-none"
-        style={{ backgroundImage: "url(/images/royal-bg.jpg)", opacity: 0.16 }}
+        style={{ backgroundImage: "url(/images/00.new/10.png)", opacity: 0.5 }}
       />
       <div className="relative z-10 max-w-6xl mx-auto px-6">
 
@@ -48,12 +48,11 @@ export default function FranchiseCost() {
           <div className="space-y-7">
             <h2 className="text-4xl md:text-5xl font-black text-white leading-[1.05]">
               업계 최저<br />
-              <span className="text-[#E41220]">창업비용과 로열티</span>
+              <span className="text-[#E41220]">창업비용</span>
             </h2>
             <p className="text-white/70 text-lg leading-relaxed">
-              온스팟은 창업 비용과 로열티 부담을 모두 낮췄습니다.
-              업계 최저 창업비용으로 초기 투자 부담을 줄이고,
-              <strong className="text-white"> 70호점까지 월 50만 원의 고정 로열티</strong> 혜택을 제공합니다.
+              업계 최저 창업비용을 제시해드립니다. 반드시 <strong className="text-white">‘총 창업 비용’</strong>을 비교해주세요!
+              창업비용 절감은 곧 점주님의 투자수익률 상승으로 이어집니다.
             </p>
 
             <div className="grid grid-cols-2 gap-4">
