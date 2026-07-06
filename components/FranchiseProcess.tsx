@@ -30,7 +30,9 @@ function useInView(threshold = 0.1) {
 }
 
 function StepCard({ s, inView }: { s: Step; inView: boolean }) {
-  const order = parseInt(s.step, 10) - 1; // 1→8 순차 등장용
+  const stepNum = parseInt(s.step, 10);
+  const order = stepNum - 1; // 1→8 순차 등장용
+  const iconNum = stepNum === 4 ? 6 : stepNum === 6 ? 4 : stepNum; // STEP 04 ↔ 06 아이콘 교체
   return (
     <div
       className="h-full bg-white border border-gray-100 rounded-2xl p-5 shadow-sm hover:shadow-md"
@@ -47,7 +49,7 @@ function StepCard({ s, inView }: { s: Step; inView: boolean }) {
         {/* 8단계 아이콘 — 세로 높이 통일 */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={`/images/00.new/8_icon/${parseInt(s.step, 10)}.png`}
+          src={`/images/00.new/8_icon/${iconNum}.png`}
           alt=""
           aria-hidden="true"
           className="h-12 w-auto object-contain shrink-0"
