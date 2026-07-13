@@ -15,16 +15,19 @@ function useInView(threshold = 0.1) {
   return { ref, inView };
 }
 
-/* 상세 조리메뉴 사진 — 실제 메뉴 촬영본 */
-const cookedMenuPhotos = [
-  { label: "떡볶이", cat: "분식", img: "/images/menu/tteokbokki.jpg", tag: "BEST" },
-  { label: "케이준감자튀김", cat: "사이드", img: "/images/menu/cajun-fries.jpg" },
-  { label: "허니버터감자튀김", cat: "사이드", img: "/images/menu/honey-fries.jpg" },
-  { label: "까르보불닭", cat: "분식", img: "/images/menu/carbo-buldak.jpg", tag: "NEW" },
-  { label: "치킨마요덮밥", cat: "덮밥", img: "/images/menu/chicken-mayo.jpg" },
-  { label: "계란후라이김치볶음밥", cat: "볶음밥", img: "/images/menu/kimchi-rice.jpg" },
-  { label: "아메리카노", cat: "카페", img: "/images/menu/americano.jpg" },
-  { label: "카페라떼", cat: "카페", img: "/images/menu/latte.jpg", tag: "BEST" },
+/* 조리메뉴 — 배경 없는(투명) PNG. 카테고리: 분식 / 사이드 / 카페 */
+const menuCategories = ["전체", "분식", "사이드", "카페"];
+const menuItems = [
+  { name: "떡볶이", cat: "분식", img: "/images/menu/tteokbokki.png" },
+  { name: "까르보불닭", cat: "분식", img: "/images/menu/carbo-buldak.png" },
+  { name: "치킨마요덮밥", cat: "분식", img: "/images/menu/chicken-mayo-rice.png" },
+  { name: "계란후라이김치볶음밥", cat: "분식", img: "/images/menu/kimchi-fried-rice.png" },
+  { name: "순살치킨", cat: "사이드", img: "/images/menu/boneless-chicken.png" },
+  { name: "뿌링순살치킨", cat: "사이드", img: "/images/menu/bburing-chicken.png" },
+  { name: "케이준감자튀김", cat: "사이드", img: "/images/menu/cajun-fries.png" },
+  { name: "허니버터감자튀김", cat: "사이드", img: "/images/menu/honey-butter-fries.png" },
+  { name: "아메리카노", cat: "카페", img: "/images/menu/americano.png" },
+  { name: "카페라떼", cat: "카페", img: "/images/menu/cafe-latte.png" },
 ];
 
 /* 이미지가 아직 없으면 회색 박스로 표시 (generate-images.bat 실행 시 자동 채워짐) */
@@ -41,6 +44,8 @@ function Photo({ src, label, ratio = "1/1", rounded = "rounded-2xl" }: { src: st
 
 export default function WhyDetail() {
   const { ref, inView } = useInView();
+  const [menuCat, setMenuCat] = useState("전체");
+  const filteredMenu = menuItems.filter((m) => menuCat === "전체" || m.cat === menuCat);
 
   return (
     <section className="py-28 bg-white overflow-hidden">
@@ -137,34 +142,45 @@ export default function WhyDetail() {
             <h3 className="text-2xl md:text-3xl font-black text-[#111]">직원이 직접 조리하는 메뉴</h3>
             <p className="text-gray-400 text-base mt-2">갓 조리한 분식부터 든든한 덮밥, 카페 음료까지</p>
           </div>
-          <div className={`grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 anim-seq ${inView ? "is-in" : ""}`}>
-            {cookedMenuPhotos.map((m, i) => (
-              <div key={i} className="group relative rounded-2xl overflow-hidden aspect-[4/5] shadow-sm bg-gray-100">
-                <div
-                  className="absolute inset-0 bg-cover bg-center transition-transform duration-[600ms] ease-out group-hover:scale-[1.08]"
-                  style={{ backgroundImage: `url(${m.img})` }}
-                  role="img"
-                  aria-label={m.label}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent" />
-                {m.tag && (
-                  <span className="absolute top-3 left-3 bg-[#E41220] text-white text-sm font-black rounded-full px-2.5 py-1 shadow">
-                    {m.tag}
-                  </span>
-                )}
-                <div className="absolute left-0 right-0 bottom-0 p-3.5 md:p-4">
-                  <p className="text-white/60 text-sm font-bold mb-0.5">{m.cat}</p>
-                  <p className="text-white font-black text-base md:text-lg leading-tight drop-shadow">{m.label}</p>
+          {/* 카테고리 필터 탭 */}
+          <div className="flex flex-wrap justify-center gap-2.5 mb-10">
+            {menuCategories.map((c) => (
+              <button
+                key={c}
+                type="button"
+                onClick={() => setMenuCat(c)}
+                className={`px-5 py-2 rounded-full text-sm font-bold transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E41220]/60 ${
+                  menuCat === c
+                    ? "bg-[#E41220] text-white shadow-md shadow-[#E41220]/30"
+                    : "bg-white/5 text-white/55 border border-white/15 hover:border-[#E41220]/50 hover:text-white"
+                }`}
+              >
+                {c}
+              </button>
+            ))}
+          </div>
+
+          {/* 메뉴 그리드 — 투명 PNG, 이름은 카드 밖. 카테고리 전환 시 순차 등장 */}
+          <div key={menuCat} className={`grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-8 md:gap-y-10 anim-seq ${inView ? "is-in" : ""}`}>
+            {filteredMenu.map((m) => (
+              <div key={m.name} className="group flex flex-col items-center">
+                {/* 이미지 — 배경 없이 부유 (드롭섀도우만) */}
+                <div className="w-full aspect-square flex items-center justify-center">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={m.img}
+                    alt={m.name}
+                    className="w-[85%] h-[85%] object-contain drop-shadow-[0_22px_28px_rgba(0,0,0,0.5)] transition-transform duration-300 ease-out group-hover:scale-[1.08] group-hover:-translate-y-1.5"
+                  />
                 </div>
+                {/* 이름 + 카테고리 (카드 밖) */}
+                <p className="text-white font-bold text-base md:text-lg mt-4 text-center leading-snug">{m.name}</p>
+                <span className="text-[#E41220] text-sm font-bold mt-1.5">{m.cat}</span>
               </div>
             ))}
           </div>
-          <p className="text-gray-400 text-sm text-center mt-6">* 스낵바 외 다양한 직원 조리 메뉴를 제공합니다</p>
-          <div className="mt-4 flex justify-center">
-            <span className="inline-flex items-center gap-1.5 bg-[#E41220]/10 text-[#E41220] text-sm font-bold rounded-full px-4 py-1.5">
-              ※ 사진들 교체 예정 (신규 촬영 사진으로)
-            </span>
-          </div>
+
+          <p className="text-gray-400 text-sm text-center mt-12">* 스낵바 외 다양한 직원 조리 메뉴를 제공합니다</p>
         </div>
 
       </div>

@@ -25,15 +25,15 @@ const reviewImages = Array.from({ length: 7 }, (_, i) => ({
 function ReviewCarousel() {
   return (
     <div className="group relative w-full overflow-hidden select-none marquee-mask">
-      <div className="flex w-max gap-5 md:gap-7 py-4 marquee-track group-hover:[animation-play-state:paused]">
+      <div className="flex w-max gap-5 md:gap-7 py-6 marquee-track group-hover:[animation-play-state:paused]">
         {[...reviewImages, ...reviewImages].map((r, i) => (
           <div
             key={i}
-            className="group/card relative flex-shrink-0 rounded-2xl overflow-hidden bg-gray-100 border border-black/5 shadow-xl cursor-pointer"
+            className="relative flex-shrink-0 rounded-2xl overflow-hidden bg-gray-100 border border-black/5 shadow-xl cursor-pointer transition-transform duration-500 ease-out hover:scale-[1.12] hover:z-20 hover:shadow-2xl"
             style={{ width: "min(62vw, 240px)", aspectRatio: "3 / 4" }}
           >
             <div
-              className="absolute inset-0 bg-cover bg-center transition-transform duration-500 ease-out group-hover/card:scale-110"
+              className="absolute inset-0 bg-cover bg-center"
               style={{ backgroundImage: `url(${r.src})` }}
               role="img"
               aria-label={r.label}
