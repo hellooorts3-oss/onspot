@@ -107,17 +107,23 @@ export default function WhyDetail() {
                 영상에 이미 실제 상태바가 들어있어 펀치홀 오버레이는 넣지 않는다(내용을 가리므로).
                 확대(scale) 없이 1:1로 넣어 잘리는 부분이 없게 함. */}
             <div className="relative w-[210px] md:w-[240px] rounded-[30px] md:rounded-[34px] border-[7px] md:border-[8px] border-[#111] bg-black shadow-2xl overflow-hidden">
-              {/* 화면(창) — 영상 원본비(9:19.5)보다 짧은 9:17로 만들어 위아래를 잘라낸다.
-                  iframe은 확대 없이 원본 비율 그대로 두고(h-full 금지 → 찌그러짐 방지),
-                  가운데 정렬 + overflow-hidden 으로 상·하단만 균등하게 크롭. */}
+              {/* 화면(창) — 영상 원본비(462:1000 ≒ 9:19.5)보다 짧은 9:15로 만들어 위아래를 잘라낸다.
+                  video는 확대 없이 원본 비율 그대로 두고(h-full 금지 → 찌그러짐 방지),
+                  가운데 정렬 + overflow-hidden 으로 상·하단만 균등하게 크롭.
+                  ※ 원본 GIF(46.9MB)를 MP4로 변환(0.55MB) — 유튜브 UI 없이 자동재생/무한반복. */}
               <div className="relative w-full bg-black overflow-hidden" style={{ aspectRatio: "9 / 15" }}>
-                <iframe
-                  className="absolute top-1/2 left-1/2 w-full pointer-events-none"
-                  src="https://www.youtube.com/embed/dxUlJ0cDKMk?autoplay=1&mute=1&loop=1&playlist=dxUlJ0cDKMk&controls=0&playsinline=1&rel=0&modestbranding=1&iv_load_policy=3&fs=0&disablekb=1"
-                  title="온스팟 QR 주문 시연"
-                  allow="autoplay; encrypted-media; picture-in-picture"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  style={{ border: 0, aspectRatio: "9 / 19.5", transform: "translate(-50%, -50%)", transformOrigin: "center" }}
+                {/* 갤럭시 화면녹화 원본(1080x2340, 12.8MB)에서 540x1170로 재인코딩(0.58MB).
+                    유튜브 iframe이 아닌 <video>라 유튜브 오버레이가 없다.
+                    아임웹에서도 파일첨부 후 cdn.imweb.me 주소로 동일하게 <video> 사용 가능. */}
+                <video
+                  className="absolute top-1/2 left-1/2 w-full object-cover pointer-events-none"
+                  src="/video/qr-order.mp4"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  aria-label="온스팟 QR 주문 시연"
+                  style={{ aspectRatio: "9 / 19.5", transform: "translate(-50%, -50%)", transformOrigin: "center" }}
                 />
               </div>
             </div>
