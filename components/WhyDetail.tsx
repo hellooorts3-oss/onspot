@@ -103,18 +103,19 @@ export default function WhyDetail() {
         >
           {/* 핸드폰 프레임 */}
           <div className="flex justify-center order-2 md:order-1">
-            <div className="relative w-[230px] rounded-[36px] border-[10px] border-[#111] bg-black shadow-2xl overflow-hidden">
-              {/* 노치 */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-5 bg-[#111] rounded-b-2xl z-20" />
-              {/* 화면 — QR 주문 시연 영상 (확대 크롭으로 폰 화면 꽉 채움 + 유튜브 UI 가림) */}
-              <div className="relative w-full bg-black overflow-hidden" style={{ aspectRatio: "9 / 16" }}>
+            {/* 갤럭시 목업 — 영상이 갤럭시 화면 녹화 원본(9:19.5)이라 화면비가 그대로 맞는다.
+                영상에 이미 실제 상태바가 들어있어 펀치홀 오버레이는 넣지 않는다(내용을 가리므로).
+                확대(scale) 없이 1:1로 넣어 잘리는 부분이 없게 함. */}
+            <div className="relative w-[210px] md:w-[240px] rounded-[30px] md:rounded-[34px] border-[7px] md:border-[8px] border-[#111] bg-black shadow-2xl overflow-hidden">
+              {/* 화면 — 갤럭시 화면비(9:19.5) = 영상 원본 비율 → 크롭 없음 */}
+              <div className="relative w-full bg-black overflow-hidden" style={{ aspectRatio: "9 / 19.5" }}>
                 <iframe
                   className="absolute top-1/2 left-1/2 w-full h-full pointer-events-none"
-                  src="https://www.youtube.com/embed/ga1nqHzgDqA?autoplay=1&mute=1&loop=1&playlist=ga1nqHzgDqA&controls=0&playsinline=1&rel=0&modestbranding=1&iv_load_policy=3&fs=0&disablekb=1"
+                  src="https://www.youtube.com/embed/dxUlJ0cDKMk?autoplay=1&mute=1&loop=1&playlist=dxUlJ0cDKMk&controls=0&playsinline=1&rel=0&modestbranding=1&iv_load_policy=3&fs=0&disablekb=1"
                   title="온스팟 QR 주문 시연"
                   allow="autoplay; encrypted-media; picture-in-picture"
                   referrerPolicy="strict-origin-when-cross-origin"
-                  style={{ border: 0, transform: "translate(-50%, -50%) scale(1.38)", transformOrigin: "center" }}
+                  style={{ border: 0, transform: "translate(-50%, -50%)", transformOrigin: "center" }}
                 />
               </div>
             </div>
