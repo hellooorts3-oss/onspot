@@ -16,18 +16,18 @@ function useInView(threshold = 0.1) {
 }
 
 /* 조리메뉴 — 배경 없는(투명) PNG. 카테고리: 분식 / 사이드 / 카페 */
-const menuCategories = ["전체", "분식", "사이드", "카페"];
+const menuCategories = ["식사", "사이드", "음료"];
 const menuItems = [
-  { name: "떡볶이", cat: "분식", img: "/images/menu/tteokbokki.png" },
-  { name: "까르보불닭", cat: "분식", img: "/images/menu/carbo-buldak.png" },
-  { name: "치킨마요덮밥", cat: "분식", img: "/images/menu/chicken-mayo-rice.png" },
-  { name: "계란후라이김치볶음밥", cat: "분식", img: "/images/menu/kimchi-fried-rice.png" },
+  { name: "떡볶이", cat: "식사", img: "/images/menu/tteokbokki.png" },
+  { name: "까르보불닭", cat: "식사", img: "/images/menu/carbo-buldak.png" },
+  { name: "치킨마요덮밥", cat: "식사", img: "/images/menu/chicken-mayo-rice.png" },
+  { name: "계란후라이김치볶음밥", cat: "식사", img: "/images/menu/kimchi-fried-rice.png" },
   { name: "순살치킨", cat: "사이드", img: "/images/menu/boneless-chicken.png" },
   { name: "뿌링순살치킨", cat: "사이드", img: "/images/menu/bburing-chicken.png" },
   { name: "케이준감자튀김", cat: "사이드", img: "/images/menu/cajun-fries.png" },
   { name: "허니버터감자튀김", cat: "사이드", img: "/images/menu/honey-butter-fries.png" },
-  { name: "아메리카노", cat: "카페", img: "/images/menu/americano.png" },
-  { name: "카페라떼", cat: "카페", img: "/images/menu/cafe-latte.png" },
+  { name: "아메리카노", cat: "음료", img: "/images/menu/americano.png" },
+  { name: "카페라떼", cat: "음료", img: "/images/menu/cafe-latte.png" },
 ];
 
 /* 이미지가 아직 없으면 회색 박스로 표시 (generate-images.bat 실행 시 자동 채워짐) */
@@ -44,8 +44,8 @@ function Photo({ src, label, ratio = "1/1", rounded = "rounded-2xl" }: { src: st
 
 export default function WhyDetail() {
   const { ref, inView } = useInView();
-  const [menuCat, setMenuCat] = useState("전체");
-  const filteredMenu = menuItems.filter((m) => menuCat === "전체" || m.cat === menuCat);
+  const [menuCat, setMenuCat] = useState(menuCategories[0]);
+  const filteredMenu = menuItems.filter((m) => m.cat === menuCat);
 
   return (
     <section className="py-28 bg-white overflow-hidden">
@@ -176,9 +176,8 @@ export default function WhyDetail() {
                     className="w-[85%] h-[85%] object-contain drop-shadow-[0_22px_28px_rgba(0,0,0,0.5)] transition-transform duration-300 ease-out group-hover:scale-[1.08] group-hover:-translate-y-1.5"
                   />
                 </div>
-                {/* 이름 + 카테고리 (카드 밖) */}
+                {/* 이름 (카드 밖) — 카테고리는 상단 필터 탭으로만 표시 */}
                 <p className="text-white font-bold text-base md:text-lg mt-4 text-center leading-snug">{m.name}</p>
-                <span className="text-[#E41220] text-sm font-bold mt-1.5">{m.cat}</span>
               </div>
             ))}
           </div>
